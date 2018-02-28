@@ -30,6 +30,7 @@ function access() {
                     toastr.success("Registro ingresado")
                     table.ajax.reload();
                     $(".input-product").cleanFields();
+                    $("#frm #document").focus();
                 }
             })
         });
