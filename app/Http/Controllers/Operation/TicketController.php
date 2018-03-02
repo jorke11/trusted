@@ -23,7 +23,7 @@ class TicketController extends Controller {
     }
 
     public function index() {
-        
+
         $dependency = Parameters::where("group", "dependency")->get();
         $clients = Stakeholder::all();
         $status = Parameters::where("group", "ticket")->get();
@@ -39,6 +39,20 @@ class TicketController extends Controller {
     public function getUsersDependency($dependency_id) {
         $users = User::where("dependency_id", $dependency_id)->get();
         return response()->json($users);
+    }
+
+    public function pause($ticket_id) {
+        $row = Ticket::find($ticket_id);
+        $row->status_id = 3;
+        $row->save();
+        return response()->json(["success" => true]);
+    }
+
+    public function pause($ticket_id) {
+        $row = Ticket::find($ticket_id);
+        $row->status_id = 4;
+        $row->save();
+        return response()->json(["success" => true]);
     }
 
     public function associate(Request $req, $ticket_id) {
@@ -62,7 +76,7 @@ class TicketController extends Controller {
         $input["dependency"] = $send->dependency;
         $input["id"] = $send->id;
         $input["client"] = $send->client;
-        
+
         Mail::send("Notifications.associate", $input, function($msj) {
             $msj->subject("notificacion");
             $msj->to($this->email);

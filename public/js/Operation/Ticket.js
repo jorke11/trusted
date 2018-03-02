@@ -8,6 +8,50 @@ function Ticket() {
         $("#btnComment").click(this.openFormComment);
         $("#btnCommentSave").click(this.addComment);
         $("#btnAssociate").click(this.associateUser);
+        $("#btnPause").click(this.pauseTicket);
+        $("#btnPause").click(this.CloseTicket);
+    }
+
+    this.closeTicket = function () {
+//        $("#btnAssociate").attr("disabled", true);
+        var param = {};
+        var token = $("input[name=_token]").val();
+
+        $.ajax({
+            url: 'ticket/close/' + $("#frm #id").val(),
+            method: 'put',
+            headers: {'X-CSRF-TOKEN': token},
+            dataType: 'JSON',
+            success: function (data) {
+                if (data.success == true) {
+                    $("#btnAssociate").attr("disabled", false);
+                    $("#modalAssociate").modal("hide");
+                    table.ajax.reload();
+                    toastr.warning("Ticket finalizado Parcial");
+                }
+            }
+        })
+    }
+    
+    this.pauseTicket = function () {
+//        $("#btnAssociate").attr("disabled", true);
+        var param = {};
+        var token = $("input[name=_token]").val();
+
+        $.ajax({
+            url: 'ticket/pause/' + $("#frm #id").val(),
+            method: 'put',
+            headers: {'X-CSRF-TOKEN': token},
+            dataType: 'JSON',
+            success: function (data) {
+                if (data.success == true) {
+                    $("#btnAssociate").attr("disabled", false);
+                    $("#modalAssociate").modal("hide");
+                    table.ajax.reload();
+                    toastr.warning("Ticket finalizado Parcial");
+                }
+            }
+        })
     }
 
     this.associateUser = function () {
@@ -117,6 +161,12 @@ function Ticket() {
             dataType: 'JSON',
             success: function (data) {
                 $('#myTabs a[href="#management"]').tab('show');
+
+                if (data.header.status_id == 2) {
+                    $("#btnPause").removeClass("hidden");
+                } else {
+                    $("#btnPause").addClass("hidden");
+                }
 
                 if (data.header.status_id == 3) {
                     $("#btnStop").removeClass("hidden");
