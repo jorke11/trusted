@@ -29,21 +29,24 @@ JOIN parameters as status ON status.code=s.status_id and status."group"='status_
 WHERE s.type_stakeholder=1 
 
 
-drop view vticket
-create view vticket as 
+drop view vtickets
+create view vtickets as 
 select t.id,t.subject,t.description,dep.description as dependency,prio.description as priority,
-s.description as status,t.created_at,t.dependency_id
+s.description as status,t.created_at,t.dependency_id,u.name ||' '||u.last_name as responsible,t.user_assigned_id
 from tickets t
+LEFT JOIN users u ON u.id=t.user_assigned_id
 JOIN parameters dep ON dep.code=t.dependency_id and dep.group='dependency'
 JOIN parameters prio ON prio.code=t.priority_id and prio.group='priority'
 JOIN parameters s ON s.code=t.status_id and s.group='status_ticket'
 
 
 
+drop view vusers
 create view vusers as 
 select  users.id,users.name,users.last_name,stakeholder.business as stakeholder,users.email,users.document,r.description as role,parameters.description as status,
-users.chief_area_id
+users.chief_area_id,dep.description as dependency
 from users
 JOIN parameters r ON r.code=users.role_id  and r.group='roles'
 LEFT JOIN stakeholder ON stakeholder.id= users.stakeholder_id
 LEFT JOIN parameters ON parameters.code = users.status_id and parameters.group='status_user'
+JOIN parameters dep ON dep.code=users.dependency_id and dep.group='dependency'

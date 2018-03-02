@@ -13,6 +13,15 @@
                         <button class="btn btn-success btn-sm" id='btnComment'>
                             <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
                         </button>
+                        @if(Auth::user()->chief_area_id == true)
+                        <button class="btn btn-warning btn-sm hidden" id='btnPause'>
+                            <span class="glyphicon glyphicon-pause" aria-hidden="true"></span>
+                        </button>
+                        @endif
+
+                        <button class="btn btn-danger btn-sm hidden" id='btnStop'>
+                            <span class="glyphicon glyphicon-stop" aria-hidden="true"></span>
+                        </button>
                     </div>
                 </div>
             </div>

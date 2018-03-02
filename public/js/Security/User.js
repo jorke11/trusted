@@ -250,8 +250,10 @@ function User() {
                 {data: "name"},
                 {data: "email"},
                 {data: "document"},
-                {data: "role","searchable": false},
+                {data: "role", "searchable": false},
                 {data: "stakeholder"},
+                {data: "dependency"},
+                {data: "chief_area_id"},
                 {data: "status"},
             ],
             order: [[0, 'ASC']],
@@ -263,7 +265,7 @@ function User() {
                     }
                 },
                 {
-                    targets: [7],
+                    targets: [9],
                     searchable: false,
                     mData: null,
                     mRender: function (data, type, full) {

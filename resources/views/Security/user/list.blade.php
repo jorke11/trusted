@@ -16,6 +16,8 @@
                         <th>Document</th>
                         <th>Profile</th>
                         <th>Stakeholder</th>
+                        <th>Dependencia</th>
+                        <th>Es Jefe de area</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>

@@ -14,6 +14,7 @@
         <!--<link href="{{ asset('css/app.css') }}" rel="stylesheet">-->
 
         <script>var PATH = '{{url("/")}}'</script>
+
         {!!Html::script('/vendor/template/vendors/jquery/dist/jquery.min.js')!!}
         {!!Html::script('/vendor/jquery-ui.js')!!}
 
@@ -83,6 +84,7 @@
     </head>
     <body>
         <div id="app">
+            <input id="role_id" type="hidden" value="{{Auth::user()->role_id}}">
             <nav class="navbar navbar-default navbar-static-top">
                 <div class="container">
                     <div class="navbar-header">
@@ -113,6 +115,8 @@
                                     <li><a href="#">Crm</a></li>
                                 </ul>
                             </li>
+                            @if(Auth::user()!=null)
+                            @if(Auth::user()->role_id==1)
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Parametrizacion <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
@@ -122,6 +126,7 @@
                                     <li><a href="/clients">Clientes</a></li>
                                 </ul>
                             </li>
+
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Seguridad <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
@@ -131,7 +136,8 @@
                                     <li><a href="#">Menu</a></li>
                                 </ul>
                             </li>
-
+                            @endif
+                            @endif
                         </ul>
 
                         <!-- Right Side Of Navbar -->

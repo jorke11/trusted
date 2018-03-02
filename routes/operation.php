@@ -15,13 +15,17 @@ Route::get('/api/listAccess', function() {
 });
 
 Route::get('/api/listTicket', function() {
+    $query = DB::table('vtickets');
 
-
-    $query = DB::table('vticket');
-
-    if (Auth::user()->chief_area_id != 0) {
-        $query = $query->where("dependency_id", Auth::user()->chief_area_id);
+    if (Auth::user()->chief_area_id != 0 && Auth::user()->role_id != 1) {
+        $query->where("dependency_id", Auth::user()->chief_area_id);
     }
+
+//    print_r(Auth::user());exit;
+    if (Auth::user()->role_id == 2) {
+        $query->where("user_assigned_id", Auth::user()->id);
+    }
+
 
     return Datatables::queryBuilder($query)->make(true);
 });

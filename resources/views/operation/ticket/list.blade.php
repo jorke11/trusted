@@ -15,6 +15,7 @@
                         <th>Date</th>
                         <th>Priority</th>
                         <th>Dependency</th>
+                        <th>Responsable</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>

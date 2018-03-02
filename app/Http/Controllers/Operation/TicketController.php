@@ -11,6 +11,7 @@ use App\Models\Operation\TicketDetail;
 use App\User;
 use DB;
 use Mail;
+use Auth;
 
 class TicketController extends Controller {
 
@@ -22,6 +23,7 @@ class TicketController extends Controller {
     }
 
     public function index() {
+        
         $dependency = Parameters::where("group", "dependency")->get();
         $clients = Stakeholder::all();
         $status = Parameters::where("group", "ticket")->get();

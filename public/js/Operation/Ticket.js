@@ -117,6 +117,13 @@ function Ticket() {
             dataType: 'JSON',
             success: function (data) {
                 $('#myTabs a[href="#management"]').tab('show');
+
+                if (data.header.status_id == 3) {
+                    $("#btnStop").removeClass("hidden");
+                } else {
+                    $("#btnStop").addClass("hidden");
+                }
+
                 $(".input-ticket").setFields({data: data.header});
                 obj.reloadComments(data.detail);
             }
@@ -169,6 +176,7 @@ function Ticket() {
                 {data: "created_at"},
                 {data: "priority"},
                 {data: "dependency"},
+                {data: "responsible"},
                 {data: "status"},
                 {data: "id"},
             ],
@@ -181,12 +189,16 @@ function Ticket() {
                     }
                 },
                 {
-                    targets: [6],
+                    targets: [7],
                     searchable: false,
                     mData: null,
                     mRender: function (data, type, full) {
                         var html = '<button class="btn btn-info btn-xs" onclick="obj.assign(' + full.id + ',' + full.dependency_id + ')"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></button>';
-                        html += '&nbsp;&nbsp;<button class="btn btn-danger btn-xs" onclick="obj.delete(' + full.id + ',' + full.dependency_id + ')"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>';
+                        if ($("#role_id").val() == 3) {
+                            html += '&nbsp;&nbsp;<button class="btn btn-danger btn-xs" onclick="obj.delete(' + full.id + ',' + full.dependency_id + ')"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>';
+                        }
+
+
                         return html;
                     }
                 }
