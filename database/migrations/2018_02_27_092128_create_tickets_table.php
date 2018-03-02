@@ -19,6 +19,7 @@ class CreateTicketsTable extends Migration {
             $table->integer('dependency_id');
             $table->integer('priority_id');
             $table->integer('status_id');
+            $table->integer('user_assigned_id');
             $table->text('document')->nullable();
             $table->timestamps();
         });

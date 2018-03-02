@@ -2,6 +2,9 @@
 
 Route::resource('ticket', 'Operation\TicketController');
 Route::get('ticket/{id}/getUsers', 'Operation\TicketController@getUsersDependency');
+Route::put('ticket/associate/{id}', 'Operation\TicketController@associate');
+Route::post('ticket/addComment', 'Operation\TicketController@addComment');
+
 
 Route::resource('accessPerson', 'Operation\AccessController');
 

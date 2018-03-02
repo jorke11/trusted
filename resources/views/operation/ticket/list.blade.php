@@ -35,7 +35,7 @@
             </div>
             <div class="modal-body">
                 {!! Form::open(['id'=>'frmAssociate']) !!}
-                <input type="hidden" id="order_id" name="order_id">
+                <input type="hidden" id="ticket_id" name="ticket_id">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="form-group">

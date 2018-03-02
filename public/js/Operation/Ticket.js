@@ -7,6 +7,30 @@ function Ticket() {
 
         $("#btnComment").click(this.openFormComment);
         $("#btnCommentSave").click(this.addComment);
+        $("#btnAssociate").click(this.associateUser);
+    }
+
+    this.associateUser = function () {
+        $("#btnAssociate").attr("disabled", true);
+        var param = {};
+        param.user_id = $("#frmAssociate #user_id").val();
+        var token = $("input[name=_token]").val();
+
+        $.ajax({
+            url: 'ticket/associate/' + $("#frmAssociate #ticket_id").val(),
+            method: 'put',
+            data: param,
+            headers: {'X-CSRF-TOKEN': token},
+            dataType: 'JSON',
+            success: function (data) {
+                if (data.success == true) {
+                    $("#btnAssociate").attr("disabled", false);
+                    $("#modalAssociate").modal("hide");
+                    table.ajax.reload();
+                    toastr.success("Usuario asignado");
+                }
+            }
+        })
     }
 
     this.openFormComment = function () {
@@ -18,7 +42,10 @@ function Ticket() {
     this.addComment = function () {
         var data = {};
         data.comment = $("#frmComment #comment").val();
-        data.ticket_id = $("#frmComment #ticket_id").val();
+        data.ticket_id = $("#frm #id").val();
+
+        console.log(data)
+
         $.ajax({
             url: '/ticket/addComment',
             method: 'POST',
@@ -158,7 +185,7 @@ function Ticket() {
                     searchable: false,
                     mData: null,
                     mRender: function (data, type, full) {
-                        var html = '<button class="btn btn-info btn-xs" onclick="obj.assign(' + full.id + ')"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></button>';
+                        var html = '<button class="btn btn-info btn-xs" onclick="obj.assign(' + full.id + ',' + full.dependency_id + ')"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></button>';
                         html += '&nbsp;&nbsp;<button class="btn btn-danger btn-xs" onclick="obj.delete(' + full.id + ',' + full.dependency_id + ')"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>';
                         return html;
                     }
@@ -170,6 +197,9 @@ function Ticket() {
     this.assign = function (id, dependency_id) {
         var html = '';
         var url = "/ticket/" + dependency_id + "/getUsers";
+
+        $("#frmAssociate #ticket_id").val(id);
+
         $.ajax({
             url: url,
             method: "GET",
@@ -177,7 +207,7 @@ function Ticket() {
             success: function (data) {
                 $("#user_id").empty();
                 $.each(data, function (i, val) {
-                    html = '<option value="' + val.id + '">' + val.name + ' ' + val.email + '</option>';
+                    html += '<option value="' + val.id + '">' + val.name + ' ' + val.email + '</option>';
                 })
                 $("#user_id").html(html);
             }
@@ -188,27 +218,7 @@ function Ticket() {
         $("#frmAssociate #order_id").val(id);
     }
 
-    this.associateUser = function () {
-        $("#btnAssociate").attr("disabled", true);
-        var param = {};
-        param.user_id = $("#frmAssociate #user_id").val();
-        var token = $("input[name=_token]").val();
-        $.ajax({
-            url: 'orders/associate/' + $("#frmAssociate #order_id").val(),
-            method: 'put',
-            data: param,
-            headers: {'X-CSRF-TOKEN': token},
-            dataType: 'JSON',
-            success: function (data) {
-                if (data.success == true) {
-                    $("#btnAssociate").attr("disabled", false);
-                    $("#modalAssociate").modal("hide");
-                    table.ajax.reload();
-                    toastr.success("Usuario asignado");
-                }
-            }
-        })
-    }
+
 
 }
 

@@ -15,7 +15,7 @@ class CreateTicketsDetailTable extends Migration {
         Schema::create('tickets_detail', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('ticket_id');
-            $table->string('document');
+            $table->text('comment');
             $table->timestamps();
         });
     }

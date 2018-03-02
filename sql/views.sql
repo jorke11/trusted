@@ -25,8 +25,9 @@ LEFT JOIN users as u ON u.id=s.responsible_id
 LEFT JOIN parameters as typeperson ON typeperson.code=s.type_person_id and typeperson."group"='typeperson'
 LEFT JOIN parameters as typeregime ON typeregime.code=s.type_regime_id and typeregime."group"='typeregime'
 LEFT JOIN parameters as typestakeholder ON typestakeholder.code=s.type_stakeholder and typestakeholder."group"='typestakeholder'
-JOIN parameters as status ON status.code=s.status_id and status."group"='generic'
+JOIN parameters as status ON status.code=s.status_id and status."group"='status_user'
 WHERE s.type_stakeholder=1 
+
 
 drop view vticket
 create view vticket as 

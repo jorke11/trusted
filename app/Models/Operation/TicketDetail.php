@@ -4,9 +4,9 @@ namespace App\Models\Operation;
 
 use Illuminate\Database\Eloquent\Model;
 
-class TicketComment extends Model {
+class TicketDetail extends Model {
 
-    protected $table = "ticket_comment";
+    protected $table = "tickets_detail";
     protected $primaryKey = "id";
     protected $fillable = ["id", "comment", "ticket_id"];
 
