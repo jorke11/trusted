@@ -48,7 +48,7 @@ class TicketController extends Controller {
         return response()->json(["success" => true]);
     }
 
-    public function pause($ticket_id) {
+    public function close($ticket_id) {
         $row = Ticket::find($ticket_id);
         $row->status_id = 4;
         $row->save();
