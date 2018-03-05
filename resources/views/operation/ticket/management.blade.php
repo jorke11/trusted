@@ -45,12 +45,15 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="last_name" class="control-label">Dependencia*</label>
-                                    <select class="form-control input-ticket input-sm"  id="dependency_id" name="dependency_id">
-                                        <option value="0">Selection</option>
-                                        @foreach($dependency as $val)
-                                        <option value="{{$val->code}}">{{$val->description}}</option>
-                                        @endforeach
-                                    </select>
+                                    <div class="input-group input-group-sm">
+                                        <span class="input-group-addon">@</span>
+                                        <select class="form-control input-ticket input-sm"  id="dependency_id" name="dependency_id">
+                                            <option value="0">Selection</option>
+                                            @foreach($dependency as $val)
+                                            <option value="{{$val->code}}">{{$val->description}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>

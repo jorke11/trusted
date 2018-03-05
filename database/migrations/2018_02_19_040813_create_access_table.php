@@ -28,6 +28,9 @@ class CreateAccessTable extends Migration {
             $table->integer('status_id');
             $table->integer('dependency_id');
             $table->string('authorization_person');
+            $table->integer('element_id');
+            $table->integer('mark_id');
+            $table->text('text_serie')->nullable();
             $table->timestamps();
         });
     }

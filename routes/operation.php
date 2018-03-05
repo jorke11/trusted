@@ -9,6 +9,7 @@ Route::post('ticket/addComment', 'Operation\TicketController@addComment');
 
 
 Route::resource('accessPerson', 'Operation\AccessController');
+Route::post('accessPerson/addParameter', 'Administration\ParametersController@store');
 
 Route::get('accessPerson/validatePerson/{document}', 'Operation\AccessController@validatePerson');
 //Route::put('accessPerson/outPerson', 'Operation\AccessController@outPerson');

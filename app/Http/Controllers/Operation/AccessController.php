@@ -11,11 +11,17 @@ use File;
 
 class AccessController extends Controller {
 
+    public function __construct() {
+        $this->middleware("auth");
+    }
+    
     public function index() {
         $arl = Parameters::where("group", "arl")->get();
         $eps = Parameters::where("group", "eps")->get();
         $dependency = Parameters::where("group", "dependency")->get();
-        return view("operation.access.index", compact("arl", "eps", "dependency"));
+        $element = Parameters::where("group", "element")->get();
+        $mark = Parameters::where("group", "mark")->get();
+        return view("operation.access.index", compact("arl", "eps", "dependency","element","mark"));
     }
 
     public function store(Request $req) {

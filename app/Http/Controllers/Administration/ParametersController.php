@@ -29,10 +29,11 @@ class ParametersController extends Controller {
 
             $max = Parameters::where("group", $input["group"])->max("code");
             $input["code"] = $max + 1;
-            
+
             $result = Parameters::create($input);
             if ($result) {
-                return response()->json(['success' => true]);
+                $detail = Parameters::where("group", $input["group"])->get();
+                return response()->json(['success' => true, "detail" => $detail]);
             } else {
                 return response()->json(['success' => false]);
             }
