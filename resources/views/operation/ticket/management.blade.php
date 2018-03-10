@@ -44,15 +44,19 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label for="last_name" class="control-label">Dependencia*</label>
+                                    <label for="email">Dependencia</label>
                                     <div class="input-group input-group-sm">
-                                        <span class="input-group-addon">@</span>
-                                        <select class="form-control input-ticket input-sm"  id="dependency_id" name="dependency_id">
-                                            <option value="0">Selection</option>
+                                        <select class="form-control input-product" id="dependency_id" name='dependency_id'>
+                                            <option value="0">Seleccione</option>
                                             @foreach($dependency as $val)
                                             <option value="{{$val->code}}">{{$val->description}}</option>
                                             @endforeach
                                         </select>
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-primary" type="button" onclick="obj.showModalParameter('dependency', 'dependency_id')">
+                                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                            </button>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -60,14 +64,22 @@
 
                         <div class="row">
                             <div class="col-lg-6">
+
                                 <div class="form-group">
-                                    <label for="last_name" class="control-label">Priority*</label>
-                                    <select class="form-control input-ticket input-sm"  id="priority_id" name="priority_id">
-                                        <option value="0">Selection</option>
-                                        @foreach($priority as $val)
-                                        <option value="{{$val->code}}">{{$val->description}}</option>
-                                        @endforeach
-                                    </select>
+                                    <label for="email">Prioridad</label>
+                                    <div class="input-group input-group-sm">
+                                        <select class="form-control input-product" id="priority_id" name='priority_id'>
+                                            <option value="0">Seleccione</option>
+                                            @foreach($priority as $val)
+                                            <option value="{{$val->code}}">{{$val->description}}</option>
+                                            @endforeach
+                                        </select>
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-primary" type="button" onclick="obj.showModalParameter('priority', 'priority_id')">
+                                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                            </button>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-lg-6">
@@ -150,6 +162,36 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-success" id="btnCommentSave">Save</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<div class="modal fade" role="dialog" id="modalParameter">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Agregar Configuración</h4>
+            </div>
+            <div class="modal-body">
+                {!! Form::open(['id'=>'frmAddParameter']) !!}
+                <input type="hidden" class="form-control input-parameter" id="group_parameter" name='group_parameter'>
+                <input type="hidden" class="form-control input-parameter" id="element_id">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label for="email">Descripcion</label>
+                            <input type="text" class="form-control input-parameter" id="description" name='description'>
+                        </div>
+                    </div>
+                </div>
+                {!!Form::close()!!}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-success" id="btnAddParameter">Agregar</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

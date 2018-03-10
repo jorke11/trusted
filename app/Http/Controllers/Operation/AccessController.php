@@ -14,14 +14,14 @@ class AccessController extends Controller {
     public function __construct() {
         $this->middleware("auth");
     }
-    
+
     public function index() {
         $arl = Parameters::where("group", "arl")->get();
         $eps = Parameters::where("group", "eps")->get();
         $dependency = Parameters::where("group", "dependency")->get();
         $element = Parameters::where("group", "element")->get();
         $mark = Parameters::where("group", "mark")->get();
-        return view("operation.access.index", compact("arl", "eps", "dependency","element","mark"));
+        return view("operation.access.index", compact("arl", "eps", "dependency", "element", "mark"));
     }
 
     public function store(Request $req) {
@@ -42,8 +42,11 @@ class AccessController extends Controller {
         $in["birth_date"] = date("Y-m-d", strtotime($in["birth_date"]));
         $in["status_id"] = 1;
 
-        $image->save($path);
+        if ($in["mark_id"] == "null") {
+            unset($in["mark_id"]);
+        }
 
+        $image->save($path);
         $row = Access::create($in);
 
         return response()->json(["status" => true, "row" => $row]);

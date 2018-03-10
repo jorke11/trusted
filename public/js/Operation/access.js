@@ -61,6 +61,7 @@ function access() {
                 $("#modalParameter").modal("hide");
                 var html = '';
                 $("#" + element_id).empty();
+                html = "<option value='0'>Seleccione</option>";
                 $.each(data.detail, function (i, val) {
                     html += "<option value='" + val.code + "'>" + val.description + "</option>";
                 })

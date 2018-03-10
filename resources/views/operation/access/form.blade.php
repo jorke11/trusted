@@ -195,7 +195,7 @@
                         </video>
 
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 hidden" >
                         <canvas id="canvas" width="400" height="300" style="border:1px solid #ccc;">
                         </canvas>
                     </div>
