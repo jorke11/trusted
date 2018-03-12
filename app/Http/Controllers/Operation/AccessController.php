@@ -21,6 +21,7 @@ class AccessController extends Controller {
         $dependency = Parameters::where("group", "dependency")->get();
         $element = Parameters::where("group", "element")->get();
         $mark = Parameters::where("group", "mark")->get();
+      
         return view("operation.access.index", compact("arl", "eps", "dependency", "element", "mark"));
     }
 

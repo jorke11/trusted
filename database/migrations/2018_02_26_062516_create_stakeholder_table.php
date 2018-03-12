@@ -40,6 +40,8 @@ class CreateStakeholderTable extends Migration
             $table->string('business')->nullable();
             $table->integer('term')->nullable();
 
+            $table->string('contact')->nullable();
+            $table->string('phone_contact')->nullable();
             $table->string('web_site')->nullable();
             $table->integer('lead_time')->nullable();
             $table->integer("user_insert");

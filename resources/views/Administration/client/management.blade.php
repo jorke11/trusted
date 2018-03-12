@@ -102,12 +102,6 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-lg-4">
-                                        <div class="form-group">
-                                            <label for="address">Plazo de Pago *</label>
-                                            <input type="text" class="form-control input-clients input-sm" id="term" name="term" required disabled>
-                                        </div>
-                                    </div>
 
                                 </div>
 

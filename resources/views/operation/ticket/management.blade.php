@@ -84,11 +84,32 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
+                                    <label for="email">Tipo Contacto</label>
+                                    <div class="input-group input-group-sm">
+                                        <select class="form-control input-product" id="type_contact_id" name='type_contact_id'>
+                                            <option value="0">Seleccione</option>
+                                            @foreach($type_contact as $val)
+                                            <option value="{{$val->code}}">{{$val->description}}</option>
+                                            @endforeach
+                                        </select>
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-primary" type="button" onclick="obj.showModalParameter('type_contact', 'type_contact_id')">
+                                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
                                     <label for="address" class="control-label">Asunto</label>
                                     <input class="form-control input-ticket input-sm" id="subject" name="subject">
                                 </div>
                             </div>
                         </div>
+
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="form-group">

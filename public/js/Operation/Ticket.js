@@ -181,6 +181,8 @@ function Ticket() {
                         $(".input-ticket").setFields({data: data});
                         table.ajax.reload();
                         toastr.success(msg);
+                    }else{
+                        toastr.error(data.msg);
                     }
                 }
             })

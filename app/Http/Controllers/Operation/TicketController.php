@@ -29,7 +29,8 @@ class TicketController extends Controller {
         $status = Parameters::where("group", "ticket")->get();
         $priority = Parameters::where("group", "priority")->get();
         $user = User::all();
-        return view("operation.ticket.init", compact("dependency", "priority", "user", "status", "clients"));
+        $type_contact = Parameters::where("group", "type_contact")->get();
+        return view("operation.ticket.init", compact("dependency", "priority", "user", "status", "clients", "type_contact"));
     }
 
     public function create() {
@@ -103,25 +104,30 @@ class TicketController extends Controller {
             $chief = User::where("chief_area_id", true)->where("dependency_id", $input["dependency_id"])->first();
             $result = Ticket::create($input);
 
-            $this->email[] = $chief->email;
+            if ($chief != NULL) {
 
-            $send = $this->dataTicketEmail($result->id);
+                $this->email[] = $chief->email;
 
-            $input["priority"] = $send->priority;
-            $input["dependency"] = $send->dependency;
-            $input["id"] = $send->id;
-            $input["client"] = $send->client;
+                $send = $this->dataTicketEmail($result->id);
 
-            Mail::send("Notifications.newticket", $input, function($msj) {
-                $msj->subject("notificacion");
-                $msj->to($this->email);
-            });
+                $input["priority"] = $send->priority;
+                $input["dependency"] = $send->dependency;
+                $input["id"] = $send->id;
+                $input["client"] = $send->client;
+
+                Mail::send("Notifications.newticket", $input, function($msj) {
+                    $msj->subject("notificacion");
+                    $msj->to($this->email);
+                });
 
 
-            if ($result) {
-                return response()->json(['success' => true]);
+                if ($result) {
+                    return response()->json(['success' => true]);
+                } else {
+                    return response()->json(['success' => false]);
+                }
             } else {
-                return response()->json(['success' => false]);
+                return response()->json(['success' => false, "msg" => "No tiene jefe asignado"]);
             }
         }
     }
