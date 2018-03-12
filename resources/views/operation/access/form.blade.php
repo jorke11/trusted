@@ -141,7 +141,6 @@
                         </div>
 
                         <div class="row">
-
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="email">Elemento</label>
@@ -182,6 +181,26 @@
                                 <div class="form-group">
                                     <label for="email">Serie</label>
                                     <input type="text" class="form-control input-product" id="text_serie" name='text_serie'>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="email">Persona de contacto</label>
+                                    <input type="text" class="form-control input-product" id="person_contact" name='person_contact'>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="email">Telefono de contacto</label>
+                                    <input type="text" class="form-control input-product" id="phone_contact" name='phone_contact'>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="email">Toma algun Medicamento</label>
+                                    <input type="text" class="form-control input-product" id="medicine" name='medicine'>
                                 </div>
                             </div>
                         </div>

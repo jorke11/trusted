@@ -23,6 +23,9 @@ class CreateTicketsTable extends Migration {
             $table->integer('type_contact_id');
             $table->integer('user_assigned_id')->nullable();
             $table->text('document')->nullable();
+            $table->string('person_contact')->nullable();
+            $table->string('phone_contact')->nullable();
+            $table->string('medicine')->nullable();
             $table->timestamps();
         });
     }
