@@ -21,5 +21,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 require __DIR__ . '/administration.php';
+require __DIR__ . '/report.php';
 require __DIR__ . '/operation.php';
 require __DIR__ . '/security.php';

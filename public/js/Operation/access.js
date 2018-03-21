@@ -164,6 +164,10 @@ function access() {
                 {data: "type_blood"},
                 {data: "dependency"},
                 {data: "authorization_person"},
+                {data: "img", render: function (data, type, row) {
+                        return '<span class="glyphicon glyphicon-eye-open" aria-hidden="true" onclick=obj.openModalPhoto(this) src=' + row.img + ' style="cursor:pointer"></span>';
+                    }
+                },
                 {data: "status_id", render: function (data, type, row) {
                         return (row.status_id == 1) ? 'Ingreso' : "Salio";
                     }
@@ -178,7 +182,7 @@ function access() {
                     }
                 },
                 {
-                    targets: [14],
+                    targets: [15],
                     searchable: false,
                     mData: null,
                     mRender: function (data, type, full) {
@@ -187,6 +191,11 @@ function access() {
                 }
             ],
         });
+    }
+
+    this.openModalPhoto = function (elem) {
+        $("#modalphoto").modal("show");
+        $("#srcphoto").attr("src", $(elem).attr("src"));
     }
 
 }

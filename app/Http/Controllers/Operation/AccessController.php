@@ -21,12 +21,16 @@ class AccessController extends Controller {
         $dependency = Parameters::where("group", "dependency")->get();
         $element = Parameters::where("group", "element")->get();
         $mark = Parameters::where("group", "mark")->get();
-      
+
         return view("operation.access.index", compact("arl", "eps", "dependency", "element", "mark"));
     }
 
     public function store(Request $req) {
         $in = $req->all();
+
+        $retrieved = $in["birth_date"];
+        $date = \DateTime::createFromFormat('dmY', $retrieved);
+        $in["birth_date"]=$date->format('Y-m-d');
 
         $path = public_path() . "/images/" . date("Y-m-d");
         $pathsys = "images/" . date("Y-m-d");

@@ -7,10 +7,7 @@ LEFT JOIN parameters eps ON eps.code=eps_id and eps.group ='eps'
 LEFT JOIN parameters arl ON arl.code=arl_id and arl.group ='arl'
 LEFT JOIN parameters dep ON dep.code=dependency_id and dep.group ='dependency'
 
-create view vcities as 
-select c.id,c.description city,d.description department,c.code
-from cities c
-join departments d ON d.id=c.department_id;
+
 
 --﻿﻿drop view vclient
 CREATE VIEW vclient AS
@@ -40,6 +37,11 @@ JOIN parameters prio ON prio.code=t.priority_id and prio.group='priority'
 JOIN parameters s ON s.code=t.status_id and s.group='status_ticket'
 
 
+
+create view vcities as 
+select c.id,c.description city,d.description department,c.code
+from cities c
+join departments d ON d.id=c.department_id;
 
 drop view vusers
 create view vusers as 

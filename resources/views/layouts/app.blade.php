@@ -84,7 +84,7 @@
     </head>
     <body>
         <div id="app">
-          
+
             <nav class="navbar navbar-default navbar-static-top">
                 <div class="container">
                     <div class="navbar-header">
@@ -116,9 +116,9 @@
                                 </ul>
                             </li>
                             @if(Auth::user()!=null)
-                            
-                              <input id="role_id" type="hidden" value="{{Auth::user()->role_id}}">
-                            
+
+                            <input id="role_id" type="hidden" value="{{Auth::user()->role_id}}">
+
                             @if(Auth::user()->role_id==1)
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Parametrizacion <span class="caret"></span></a>
@@ -127,6 +127,12 @@
                                     <li><a href="/city">Ciudades</a></li>
                                     <li><a href="/department">Departamentos</a></li>
                                     <li><a href="/clients">Clientes</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reportes <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/reportAccess">Acceso</a></li>
                                 </ul>
                             </li>
 
