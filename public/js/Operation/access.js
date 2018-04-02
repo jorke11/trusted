@@ -56,7 +56,7 @@ function access() {
             dataType: 'JSON',
             success: function (data) {
                 toastr.success("Paramatro ingresado")
-                $(".input-product").cleanFields();
+//                $(".input-product").cleanFields();
                 $("#frm #document").focus();
                 $("#modalParameter").modal("hide");
                 var html = '';
@@ -112,6 +112,8 @@ function access() {
             success: function (data) {
                 if (data.status == true) {
                     toastr.success("Operacion realizada")
+                    $(".input-product").cleanFields();
+                    $("#frm #document").focus()
                     table.ajax.reload();
                 }
             }, error: function (xhr, ajaxOptions, thrownError) {

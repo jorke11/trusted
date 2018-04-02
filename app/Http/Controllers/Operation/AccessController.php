@@ -16,11 +16,11 @@ class AccessController extends Controller {
     }
 
     public function index() {
-        $arl = Parameters::where("group", "arl")->get();
-        $eps = Parameters::where("group", "eps")->get();
-        $dependency = Parameters::where("group", "dependency")->get();
-        $element = Parameters::where("group", "element")->get();
-        $mark = Parameters::where("group", "mark")->get();
+        $arl = Parameters::where("group", "arl")->orderBy("description", "asc")->get();
+        $eps = Parameters::where("group", "eps")->orderBy("description", "asc")->get();
+        $dependency = Parameters::where("group", "dependency")->orderBy("description", "asc")->get();
+        $element = Parameters::where("group", "element")->orderBy("description", "asc")->get();
+        $mark = Parameters::where("group", "mark")->orderBy("description", "asc")->get();
 
         return view("operation.access.index", compact("arl", "eps", "dependency", "element", "mark"));
     }
@@ -30,7 +30,7 @@ class AccessController extends Controller {
 
         $retrieved = $in["birth_date"];
         $date = \DateTime::createFromFormat('dmY', $retrieved);
-        $in["birth_date"]=$date->format('Y-m-d');
+        $in["birth_date"] = $date->format('Y-m-d');
 
         $path = public_path() . "/images/" . date("Y-m-d");
         $pathsys = "images/" . date("Y-m-d");
