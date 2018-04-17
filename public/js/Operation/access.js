@@ -1,5 +1,5 @@
 function access() {
-    var table;
+    var table, tableReception;
     var c = document.getElementById("canvas");
     var ctx = c.getContext("2d");
 
@@ -41,6 +41,69 @@ function access() {
 //        $("#document").blur(this.checkPerson)
 
         $("#tabList").click(obj.table);
+
+        $("#tabReception").click(this.tabDocument)
+        $("#tabAuth").click(this.tabAuth)
+
+        $("#btnSaveReception").click(this.saveReception);
+        $("#btnNewReception").click(this.newReception)
+
+        $("#btnSaveAuth").click(this.saveAuth);
+        $("#btnNewAuth").click(this.newAuth)
+    }
+
+    this.newAuth = function () {
+        $(".input-auth").cleanFields()
+    }
+
+
+    this.tabAuth = function () {
+        tableReception = obj.tableAuth();
+    }
+    
+    this.tabDocument = function () {
+        tableReception = obj.tableReception()
+        obj.takePhotoReception();
+    }
+
+    this.saveAuth = function () {
+
+        var data = {};
+        data = $(".input-auth").getData();
+
+        $.ajax({
+            url: PATH + '/accessPerson/authorization',
+            type: 'POST',
+            data: data,
+            dataType: 'JSON',
+            success: function (data) {
+                toastr.success("Registro ingresado")
+                tableReception.ajax.reload();
+                $(".input-reception").cleanFields();
+            }
+        })
+    }
+    
+    this.saveReception = function () {
+
+        var data = {};
+        data = $(".input-reception").getData();
+
+        $.ajax({
+            url: PATH + '/accessPerson/reception',
+            type: 'POST',
+            data: data,
+            dataType: 'JSON',
+            success: function (data) {
+                toastr.success("Registro ingresado")
+                tableReception.ajax.reload();
+                $(".input-reception").cleanFields();
+            }
+        })
+    }
+
+    this.newReception = function () {
+        $(".input-reception").cleanFields()
     }
 
     this.addParameter = function () {
@@ -80,9 +143,6 @@ function access() {
     }
 
 
-
-
-
     this.checkPerson = function () {
         var value = this.value;
         $.ajax({
@@ -95,6 +155,11 @@ function access() {
                 }
             }
         })
+    }
+
+    this.takePhotoReception = function () {
+        var video = $('#camReception'), video = video[0];
+        ctx.drawImage(video, 0, 0, c.width, c.height);
     }
 
     this.takePhoto = function () {
@@ -144,6 +209,72 @@ function access() {
             alert('tu nav egador no es  c o m patible');
         }
         return videoex;
+    }
+
+    this.tableAuth = function () {
+        return $('#tblAuth').DataTable({
+            processing: true,
+            serverSide: true,
+            destroy: true,
+            ajax: "/api/listAuth",
+            columns: [
+                {data: "id"},
+                {data: "document"},
+                {data: "reason"},
+                {data: "status"},
+            ],
+            order: [[1, 'ASC']],
+            aoColumnDefs: [
+                {
+                    aTargets: [0, 1, 2, 3],
+                    mRender: function (data, type, full) {
+                        return '<a href="#" onclick="obj.showModal(' + full.id + ')">' + data + '</a>';
+                    }
+                },
+                {
+                    targets: 4,
+                    searchable: false,
+                    mData: null,
+                    mRender: function (data, type, full) {
+                        return '<button class="btn btn-danger btn-xs" onclick="obj.delete(' + data.id + ')"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>';
+                    }
+                }
+            ],
+        });
+    }
+    
+    this.tableReception = function () {
+        return $('#tblReception').DataTable({
+            processing: true,
+            serverSide: true,
+            destroy: true,
+            ajax: "/api/listReception",
+            columns: [
+                {data: "id"},
+                {data: "reception_element"},
+                {data: "sender"},
+                {data: "dependency"},
+                {data: "received_id"},
+                {data: "observation"},
+            ],
+            order: [[1, 'ASC']],
+            aoColumnDefs: [
+                {
+                    aTargets: [0, 1, 2, 3],
+                    mRender: function (data, type, full) {
+                        return '<a href="#" onclick="obj.showModal(' + full.id + ')">' + data + '</a>';
+                    }
+                },
+                {
+                    targets: 6,
+                    searchable: false,
+                    mData: null,
+                    mRender: function (data, type, full) {
+                        return '<button class="btn btn-danger btn-xs" onclick="obj.delete(' + data.id + ')"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>';
+                    }
+                }
+            ],
+        });
     }
 
     this.table = function () {

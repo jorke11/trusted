@@ -78,14 +78,56 @@
         {!!Html::style('/vendor/select2/css/select2.min.css')!!}
         {!!Html::script('/vendor/select2/js/select2.js')!!}
         {!!Html::script('/vendor/plugins.js')!!}
-        {!!Html::style('/css/edited.css')!!}
-
 
     </head>
+
+    <style>
+        /*        .navbar-default {
+                    background-color: #212121;
+                    border-color: #E7E7E7;
+                }*/
+
+        .navbar-custom {
+            background-color:#212121;
+            color:#ffffff;
+            border-radius:0;
+        }
+
+        .navbar-custom .navbar-nav > li > a {
+            color:#fff;
+        }
+
+        .navbar-custom .navbar-nav > .active > a {
+            color: #ffffff;
+            background-color:transparent;
+        }
+
+        .navbar-custom .navbar-nav > li > a:hover,
+        .navbar-custom .navbar-nav > li > a:focus,
+        .navbar-custom .navbar-nav > .active > a:hover,
+        .navbar-custom .navbar-nav > .active > a:focus,
+        .navbar-custom .navbar-nav > .open >a {
+            text-decoration: none;
+            background-color: white;
+            
+        }
+
+        .navbar-custom .navbar-brand {
+            color:#eeeeee;
+        }
+        .navbar-custom .navbar-toggle {
+            background-color:#eeeeee;
+        }
+        .navbar-custom .icon-bar {
+            background-color:#33aa33;
+        }
+
+    </style>
+
     <body>
         <div id="app">
 
-            <nav class="navbar navbar-default navbar-static-top">
+            <nav class="navbar navbar-custom navbar-default navbar-static-top ">
                 <div class="container">
                     <div class="navbar-header">
 
@@ -106,8 +148,7 @@
                     <div class="collapse navbar-collapse" id="app-navbar-collapse">
                         <!-- Left Side Of Navbar -->
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="{{url("/")}}">Inicio</a></li>
-                            <li class="dropdown">
+                            <li class="dropdown active">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Operacion <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="/accessPerson">Ingreso Personas</a></li>

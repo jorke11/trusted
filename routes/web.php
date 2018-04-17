@@ -18,6 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/template', 'TestController@index');
 
 
 require __DIR__ . '/administration.php';

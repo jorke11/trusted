@@ -10,11 +10,20 @@ Route::post('ticket/addComment', 'Operation\TicketController@addComment');
 
 Route::resource('accessPerson', 'Operation\AccessController');
 Route::post('accessPerson/addParameter', 'Administration\ParametersController@store');
+Route::post('accessPerson/reception', 'Operation\AccessController@addElement');
+Route::post('accessPerson/authorization', 'Operation\AccessController@addAuthorization');
 
 Route::get('accessPerson/validatePerson/{document}', 'Operation\AccessController@validatePerson');
 //Route::put('accessPerson/outPerson', 'Operation\AccessController@outPerson');
 Route::get('/api/listAccess', function() {
     return Datatables::queryBuilder(DB::table("vaccess_person")->orderBy("id", "desc"))->make(true);
+});
+
+Route::get('api/listAuth', function() {
+    return Datatables::queryBuilder(DB::table("vauthorization_person")->orderBy("id", "desc"))->make(true);
+});
+Route::get('api/listReception', function() {
+    return Datatables::queryBuilder(DB::table("vreception_elements")->orderBy("id", "desc"))->make(true);
 });
 
 Route::get('/api/listTicket', function() {

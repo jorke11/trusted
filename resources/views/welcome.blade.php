@@ -9,11 +9,11 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-
+        {!!Html::script('/vendor/template/vendors/jquery/dist/jquery.min.js')!!}
         <!-- Styles -->
         <style>
             html, body {
-                background-color: #fff;
+                background-color: #212121;
                 color: #636b6f;
                 font-family: 'Raleway', sans-serif;
                 font-weight: 100;
@@ -46,7 +46,13 @@
             }
 
             .title {
-                font-size: 84px;
+                font-size: 86px;
+                font-weight: 400;
+                color:white
+            }
+
+            .icons{
+                padding-top: 30px
             }
 
             .links > a {
@@ -57,24 +63,27 @@
                 letter-spacing: .1rem;
                 text-decoration: none;
                 text-transform: uppercase;
+
             }
 
             .m-b-md {
                 margin-bottom: 30px;
             }
         </style>
+
     </head>
     <body>
+        <i class="fas fa-ticket-alt"></i>
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
-                <div class="top-right links">
-                    @if (Auth::check())
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ url('/login') }}">Login</a>
-                        <a href="{{ url('/register') }}">Register</a>
-                    @endif
-                </div>
+            <div class="top-right links">
+                @if (Auth::check())
+                <a href="{{ url('/home') }}">Home</a>
+                @else
+                <a href="{{ url('/login') }}">Login</a>
+                <a href="{{ url('/register') }}">Register</a>
+                @endif
+            </div>
             @endif
 
             <div class="content">
@@ -82,12 +91,17 @@
                     Trusted
                 </div>
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                <div class="links icons">
+                    <a href="#">
+                        <svg id="i-clipboard" style="color:#ff9900" viewBox="0 0 32 32" width="100" height="100"  fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                        <path d="M12 2 L12 6 20 6 20 2 12 2 Z M11 4 L6 4 6 30 26 30 26 4 21 4" />
+                        </svg>
+                    </a>
+                    <a href="#">
+                        <svg id="i-unlock" style="color:#ff9900" viewBox="0 0 32 32" width="100" height="100" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                        <path d="M5 15 L5 30 27 30 27 15 Z M9 15 C9 7 9 3 16 3 23 3 23 8 23 9 M16 20 L16 23" />
+                        <circle cx="16" cy="24" r="1" />
+                        </svg></a>
                 </div>
             </div>
         </div>

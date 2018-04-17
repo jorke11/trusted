@@ -52,3 +52,18 @@ JOIN parameters r ON r.code=users.role_id  and r.group='roles'
 LEFT JOIN stakeholder ON stakeholder.id= users.stakeholder_id
 LEFT JOIN parameters ON parameters.code = users.status_id and parameters.group='status_user'
 JOIN parameters dep ON dep.code=users.dependency_id and dep.group='dependency'
+
+
+drop view vreception_elements
+create view vreception_elements as 
+select r.id,r.observation,elem.description as reception_element,dep.description as dependency,s.description as sender,r.received_id
+from reception_elements r
+JOIN parameters elem ON elem.code=r.reception_element_id and elem.group = 'element_reception'
+JOIN parameters dep ON dep.code=r.dependency_id and dep.group = 'dependency'
+JOIN parameters s ON s.code=r.sender_id and s.group = 'sender'
+
+
+create view vauthorization_person as 
+select a.id,a.document,s.description as status,a.reason
+from  authorization_person a
+JOIN parameters s ON s.code=a.status_access_id and s.group = 'status_access'

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Operation\Access;
 use App\Models\Administration\Parameters;
+use App\Models\Operation\ReceptionElement;
+use App\Models\Operation\AuthorizationPerson;
 use File;
 
 class AccessController extends Controller {
@@ -21,8 +23,11 @@ class AccessController extends Controller {
         $dependency = Parameters::where("group", "dependency")->orderBy("description", "asc")->get();
         $element = Parameters::where("group", "element")->orderBy("description", "asc")->get();
         $mark = Parameters::where("group", "mark")->orderBy("description", "asc")->get();
+        $elements_reception = Parameters::where("group", "element_reception")->orderBy("description", "asc")->get();
+        $sender = Parameters::where("group", "sender")->orderBy("description", "asc")->get();
+        $status_access = Parameters::where("group", "status_access")->orderBy("description", "asc")->get();
 
-        return view("operation.access.index", compact("arl", "eps", "dependency", "element", "mark"));
+        return view("operation.access.index", compact("arl", "eps", "dependency", "element", "mark", "elements_reception", "sender","status_access"));
     }
 
     public function store(Request $req) {
@@ -55,6 +60,25 @@ class AccessController extends Controller {
         $row = Access::create($in);
 
         return response()->json(["status" => true, "row" => $row]);
+    }
+
+    public function addElement(Request $req) {
+        $in = $req->all();
+        $result = ReceptionElement::create($in);
+
+        if ($result) {
+            return response()->json(["status" => true]);
+        }
+    }
+    
+    public function addAuthorization(Request $req) {
+        $in = $req->all();
+        
+        $result = AuthorizationPerson::create($in);
+
+        if ($result) {
+            return response()->json(["status" => true]);
+        }
     }
 
     public function update($document) {
