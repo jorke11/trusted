@@ -20,7 +20,7 @@ function access() {
             var data = {};
             data = $(".input-product").getData();
             data.img = c.toDataURL("image/jpg");
-            
+
             $.ajax({
                 url: PATH + '/accessPerson',
                 type: 'POST',
@@ -320,11 +320,36 @@ function access() {
                     searchable: false,
                     mData: null,
                     mRender: function (data, type, full) {
-                        return '<button class="btn btn-danger btn-xs" onclick="obj.delete(' + data.id + ')"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>';
+                        var html = ""
+                        if (data.status_id == 1) {
+                            html = '<button class="btn btn-danger btn-xs" onclick="obj.delete(' + data.document + ')"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>';
+                        }
+
+                        return  html;
                     }
                 }
             ],
         });
+    }
+
+    this.delete = function (document) {
+        toastr.remove();
+        var data = {};
+        $.ajax({
+            url: PATH + '/accessPerson/' + document,
+            type: 'put',
+            dataType: 'JSON',
+            success: function (data) {
+                if (data.status == true) {
+                    toastr.success("Operacion realizada")
+                    $(".input-product").cleanFields();
+                    $("#frm #document").focus()
+                    table.ajax.reload();
+                }
+            }, error: function (xhr, ajaxOptions, thrownError) {
+                toastr.error(xhr.responseJSON.msg)
+            }
+        })
     }
 
     this.openModalPhoto = function (elem) {
