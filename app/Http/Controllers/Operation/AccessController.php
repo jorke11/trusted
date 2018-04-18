@@ -96,6 +96,7 @@ class AccessController extends Controller {
     public function validatePerson($document) {
         $row = Access::where("document", $document)->orderBy("created_at", "desc")->first();
         if ($row != null) {
+            $row->birth_date = date("dmY", strtotime($row->birth_date));
             return response()->json(["status" => true, "row" => $row]);
         } else {
             return response()->json(["status" => false]);
