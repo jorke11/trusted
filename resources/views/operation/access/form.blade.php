@@ -40,7 +40,7 @@
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="email" class="control-label">Segundo Nombre*</label>
-                                    <input type="text" class="form-control input-product input-sm" id="second_name" name='second_name' required data-type="number">
+                                    <input type="text" class="form-control input-product input-sm" id="second_name" name='second_name' data-type="number">
                                 </div>
                             </div>
                             <div class="col-lg-4">
