@@ -230,7 +230,7 @@
                                 <ul class="dropdown-menu">
                                     <li><a href="/reportAccess">Acceso</a></li>
                                 </ul>
-                            </li>
+                            </li>-->
 
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Seguridad <span class="caret"></span></a>
@@ -240,7 +240,7 @@
                                     <li><a href="#">Roles</a></li>
                                     <li><a href="#">Menu</a></li>
                                 </ul>
-                            </li>-->
+                            </li>
                             @endif
                             @endif
                         </ul>

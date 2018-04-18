@@ -31,7 +31,7 @@ class UserController extends Controller {
     }
 
     public function index() {
-        $roles = Parameters::where("group", "roles")->get();
+        $roles = Parameters::where("group", "role_id")->get();
         $dependency = Parameters::where("group", "dependency")->get();
         return view("Security.user.init", compact("roles", "dependency"));
     }
