@@ -297,7 +297,7 @@ function access() {
                 {data: "type_blood"},
                 {data: "dependency"},
                 {data: "authorization_person"},
-                {data: "img", render: function (data, type, row) {
+                {data: "img", searchable: false, render: function (data, type, row) {
                         return '<span class="glyphicon glyphicon-eye-open" aria-hidden="true" onclick=obj.openModalPhoto(this) src=' + row.img + ' style="cursor:pointer;color:black"></span>';
                     }
                 },
