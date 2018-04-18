@@ -782,6 +782,7 @@ function Client() {
                     defaultContent: '',
                     searchable: false,
                 },
+                
                 {data: "business_name"},
                 {data: "business"},
                 {data: "document"},

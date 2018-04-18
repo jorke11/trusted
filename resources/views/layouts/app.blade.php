@@ -208,7 +208,12 @@
 
                         <!-- Branding Image -->
                         <a class="navbar-brand" href="{{ url('/') }}">
-                            {{Session::get('title')}}
+
+                            <img src="{{url("images/stakeholder/".Session::get("logo"))}}" style="width:80px;">
+                            <!--<span style="display: inline-block;">{{Session::get('title')}}</span>-->
+
+                            <!--<img src="{{url("images/stakeholder/".Session::get("logo"))}}" style="width:6%;padding-right: 4px"/>{{Session::get('title')}}-->
+                            <!--{{Session::get('title')}}-->
                         </a>
                     </div>
 

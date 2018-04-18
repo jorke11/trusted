@@ -19,13 +19,19 @@ class HomeController extends Controller {
      */
     public function index() {
 
+        $row = \App\Models\Administration\Stakeholder::find(Auth::user()->stakeholder_id);
+        Session::put('logo', $row->logo);
+
         if (Auth::user()->role_id == 1) {
             $title_db = \App\Models\Administration\Parameters::where("group", "main_title")->first();
             $title = "Trusted";
+
             if ($title_db != null) {
                 $title = $title_db->value;
             }
+
             Session::put('title', $title);
+
             return view('home');
         } else {
             return redirect("accessPerson");

@@ -13,6 +13,7 @@ use File;
 use Auth;
 use DB;
 use Datatables;
+use Session;
 
 class AccessController extends Controller {
 
@@ -21,6 +22,7 @@ class AccessController extends Controller {
     }
 
     public function index() {
+        
         $arl = Parameters::where("group", "arl")->orderBy("description", "asc")->get();
         $eps = Parameters::where("group", "eps")->orderBy("description", "asc")->get();
         $dependency = Parameters::where("group", "dependency")->orderBy("description", "asc")->get();
