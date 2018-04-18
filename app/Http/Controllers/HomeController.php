@@ -4,14 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Session;
+use Auth;
 
 class HomeController extends Controller {
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct() {
         $this->middleware('auth');
     }
@@ -22,13 +18,18 @@ class HomeController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $title_db = \App\Models\Administration\Parameters::where("group", "main_title")->first();
-        $title = "Trusted";
-        if ($title_db != null) {
-            $title = $title_db->value;
+
+        if (Auth::user()->role_id != 1) {
+            $title_db = \App\Models\Administration\Parameters::where("group", "main_title")->first();
+            $title = "Trusted";
+            if ($title_db != null) {
+                $title = $title_db->value;
+            }
+            Session::put('title', $title);
+            return view('home');
+        } else {
+            redirect("accessPerson");
         }
-        Session::put('title', $title);
-        return view('home');
     }
 
 }

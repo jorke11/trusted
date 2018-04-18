@@ -10,6 +10,7 @@ use App\Models\Administration\Parameters;
 use App\Models\Operation\ReceptionElement;
 use App\Models\Operation\AuthorizationPerson;
 use File;
+use Auth;
 
 class AccessController extends Controller {
 
@@ -32,7 +33,7 @@ class AccessController extends Controller {
 
     public function store(Request $req) {
         $in = $req->all();
-        
+
 //        dd($in);
         $retrieved = $in["birth_date"];
         $date = \DateTime::createFromFormat('dmY', $retrieved);
@@ -54,7 +55,7 @@ class AccessController extends Controller {
         $in["status_id"] = 1;
 
         unset($in["id"]);
-        
+
         if ($in["mark_id"] == "null") {
             unset($in["mark_id"]);
         }
@@ -63,6 +64,21 @@ class AccessController extends Controller {
         $row = Access::create($in);
 
         return response()->json(["status" => true, "row" => $row]);
+    }
+
+    public function listAccess() {
+        $query = DB::table('vtickets');
+
+        if (Auth::user()->chief_area_id != 0 && Auth::user()->role_id != 1) {
+            $query->where("dependency_id", Auth::user()->chief_area_id);
+        }
+
+        if (Auth::user()->role_id == 2) {
+            $query->where("user_assigned_id", Auth::user()->id);
+        }
+
+
+        return Datatables::queryBuilder($query)->make(true);
     }
 
     public function addElement(Request $req) {
