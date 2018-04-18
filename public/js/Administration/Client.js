@@ -493,6 +493,7 @@ function Client() {
         var id = $("#frm #id").val();
         var msg = '';
         var validate = $(".input-clients").validate();
+        console.log(validate)
         if (validate.length == 0) {
             if (id == '') {
                 method = 'POST';
