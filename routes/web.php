@@ -15,7 +15,11 @@ use App\Models;
 
 Route::get('/', function () {
     $title_db = Models\Administration\Parameters::where("group", "main_title")->first();
-    $title = $title_db->value;
+    $title = "Trusted";
+    if ($title_db != null) {
+        $title = $title_db->value;
+    }
+
 
     return view('welcome', compact("title"));
 });
