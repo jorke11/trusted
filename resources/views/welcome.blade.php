@@ -96,7 +96,8 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    {{$title}}
+                    Trusted
+                    <!--{{$title}}-->
                 </div>
 
                 <div class="links icons">
