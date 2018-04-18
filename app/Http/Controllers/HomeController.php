@@ -28,6 +28,7 @@ class HomeController extends Controller {
             Session::put('title', $title);
             return view('home');
         } else {
+            echo "asd";exit;
             redirect("accessPerson");
         }
     }
