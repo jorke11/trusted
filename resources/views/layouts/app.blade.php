@@ -215,16 +215,18 @@
                     <div class="collapse navbar-collapse" id="app-navbar-collapse">
                         <!-- Left Side Of Navbar -->
                         <ul class="nav navbar-nav">
+                            @if(Auth::user()->role_id==1)
                             <li class="dropdown active">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Operacion <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="/accessPerson">Ingreso Personas</a></li>
-                                    @if(Auth::user()->role_id==1)
+
                                     <li><a href="/ticket">Tickets</a></li>
                                     <li><a href="#">Crm</a></li>
-                                    @endif
+
                                 </ul>
                             </li>
+                            @endif
                             @if(Auth::user()!=null)
 
                             <input id="role_id" type="hidden" value="{{Auth::user()->role_id}}">
