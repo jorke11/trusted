@@ -32,6 +32,7 @@ class AccessController extends Controller {
 
     public function store(Request $req) {
         $in = $req->all();
+        
 //        dd($in);
         $retrieved = $in["birth_date"];
         $date = \DateTime::createFromFormat('dmY', $retrieved);
@@ -52,6 +53,8 @@ class AccessController extends Controller {
         $in["birth_date"] = date("Y-m-d", strtotime($in["birth_date"]));
         $in["status_id"] = 1;
 
+        unset($in["id"]);
+        
         if ($in["mark_id"] == "null") {
             unset($in["mark_id"]);
         }
