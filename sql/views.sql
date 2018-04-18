@@ -67,3 +67,20 @@ create view vauthorization_person as
 select a.id,a.document,s.description as status,a.reason
 from  authorization_person a
 JOIN parameters s ON s.code=a.status_access_id and s.group = 'status_access'
+
+
+SELECT users.id,
+    users.name,
+    users.last_name,
+    stakeholder.business AS stakeholder,
+    users.email,
+    users.document,
+    r.description AS role,
+    parameters.description AS status,
+    users.chief_area_id,
+    dep.description AS dependency
+   FROM users
+     JOIN parameters r ON r.code = users.role_id AND r."group"::text = 'role_id'::text
+     LEFT JOIN stakeholder ON stakeholder.id = users.stakeholder_id
+     LEFT JOIN parameters ON parameters.code = users.status_id AND parameters."group"::text = 'status_user'::text
+     JOIN parameters dep ON dep.code = users.dependency_id AND dep."group"::text = 'dependency'::text;
