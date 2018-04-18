@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel">
-                <div class="panel-heading">Dashboard</div>
+                <div class="panel-heading">Bienvenid@</div>
 
                 <div class="panel-body">
                     @if (session('status'))
@@ -14,7 +14,7 @@
                     </div>
                     @endif
 
-                    You are logged in!
+                    Tu estas logueado al sistema {{Session::get("title")}}
                 </div>
             </div>
         </div>
