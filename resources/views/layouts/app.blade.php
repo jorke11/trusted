@@ -8,7 +8,7 @@
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Trusted') }}</title>
+        <title>{{Session::get('title')}}</title>
 
         <!-- Styles -->
         <!--<link href="{{ asset('css/app.css') }}" rel="stylesheet">-->
@@ -219,8 +219,10 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Operacion <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="/accessPerson">Ingreso Personas</a></li>
+                                    @if(Auth::user()->role_id==1)
                                     <li><a href="/ticket">Tickets</a></li>
                                     <li><a href="#">Crm</a></li>
+                                    @endif
                                 </ul>
                             </li>
                             @if(Auth::user()!=null)
