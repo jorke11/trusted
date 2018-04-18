@@ -89,7 +89,7 @@
 
         html,body{
             color:white;
-
+            height: 100%;
         }
 
         .panel{
@@ -172,10 +172,12 @@
     </style>
 
     <body style='
-          background-image:url("images/fondoespacial.jpg");    height: 100%; 
-          background-position: center;
-          background-repeat: no-repeat;
+          background:url("images/fondoespacial.jpg") no-repeat center center fixed; 
+          -webkit-background-size: cover;
+          -moz-background-size: cover;
+          -o-background-size: cover;
           background-size: cover;
+
           '>
         <div id="app">
 
