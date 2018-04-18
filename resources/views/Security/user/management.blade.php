@@ -53,6 +53,7 @@
                 <input type="text" class="form-control input-user" id="email" name='email' required>
             </div>
         </div>
+        @if(Auth::user()->role_id==1)
         <div class="col-lg-3">
             <div class="form-group">
                 <label for="email">Stakeholder:</label>
@@ -60,6 +61,7 @@
                 </select>
             </div>
         </div>
+        @endif
     </div>
     <div class="row">
         <div class="col-lg-3">

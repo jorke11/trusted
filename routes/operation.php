@@ -1,4 +1,5 @@
 <?php
+
 Route::resource('ticket', 'Operation\TicketController');
 Route::get('ticket/{id}/getUsers', 'Operation\TicketController@getUsersDependency');
 Route::put('ticket/associate/{id}', 'Operation\TicketController@associate');
@@ -14,10 +15,7 @@ Route::post('accessPerson/authorization', 'Operation\AccessController@addAuthori
 
 Route::get('accessPerson/validatePerson/{document}', 'Operation\AccessController@validatePerson');
 //Route::put('accessPerson/outPerson', 'Operation\AccessController@outPerson');
-Route::get('/api/listAccess', function() {
-    $sql = DB::table("vaccess_person")->where("insert_id", Auth::user()->id)->orderBy("id", "desc");
-    return Datatables::queryBuilder($sql)->make(true);
-});
+Route::get('/api/listAccess', 'Operation\AccessController@listAccess');
 
 Route::get('api/listAuth', function() {
     return Datatables::queryBuilder(DB::table("vauthorization_person")->orderBy("id", "desc"))->make(true);

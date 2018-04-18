@@ -11,6 +11,8 @@ use App\Models\Operation\ReceptionElement;
 use App\Models\Operation\AuthorizationPerson;
 use File;
 use Auth;
+use DB;
+use Datatables;
 
 class AccessController extends Controller {
 
@@ -34,51 +36,57 @@ class AccessController extends Controller {
     public function store(Request $req) {
         $in = $req->all();
 
-//        dd($in);
-        $retrieved = $in["birth_date"];
-        $date = \DateTime::createFromFormat('dmY', $retrieved);
-        $in["birth_date"] = $date->format('Y-m-d');
 
-        $path = public_path() . "/images/" . date("Y-m-d");
-        $pathsys = "images/" . date("Y-m-d");
 
-        $res = File::makeDirectory($path, $mode = 0777, true, true);
-        $manager = new ImageManager(array('driver' => 'imagick'));
+        $person = Access::where("document", $in["document"])->where("status_id", 1)->first();
 
-        $image = $manager->make($in["img"])->widen(400);
-        $pathsys .= "/" . $in["document"] . ".jpg";
-        $path .= "/" . $in["document"] . ".jpg";
+        if ($person == null) {
+
+            $retrieved = $in["birth_date"];
+            $date = \DateTime::createFromFormat('dmY', $retrieved);
+            $in["birth_date"] = $date->format('Y-m-d');
+
+            $path = public_path() . "/images/" . date("Y-m-d");
+            $pathsys = "images/" . date("Y-m-d");
+
+            $res = File::makeDirectory($path, $mode = 0777, true, true);
+            $manager = new ImageManager(array('driver' => 'imagick'));
+
+            $image = $manager->make($in["img"])->widen(400);
+            $pathsys .= "/" . $in["document"] . ".jpg";
+            $path .= "/" . $in["document"] . ".jpg";
 //        echo $path;exit;
 
-        $in["img"] = url($pathsys);
-        $in["birth_date"] = date("Y-m-d", strtotime($in["birth_date"]));
-        $in["status_id"] = 1;
+            $in["img"] = url($pathsys);
+            $in["birth_date"] = date("Y-m-d", strtotime($in["birth_date"]));
+            $in["status_id"] = 1;
 
-        unset($in["id"]);
+            unset($in["id"]);
 
-        if ($in["mark_id"] == "null") {
-            unset($in["mark_id"]);
+            if ($in["mark_id"] == "null") {
+                unset($in["mark_id"]);
+            }
+
+            $image->save($path);
+            $row = Access::create($in);
+
+            return response()->json(["status" => true, "row" => $row, "msg" => "Registro ingresado"]);
+        } else {
+            return response()->json(["status" => false, "msg" => "Persona ingresada, tienes que darle salida antes de ingresarlo de nuevo"]);
         }
-
-        $image->save($path);
-        $row = Access::create($in);
-
-        return response()->json(["status" => true, "row" => $row]);
     }
 
     public function listAccess() {
-        $query = DB::table('vtickets');
 
-        if (Auth::user()->chief_area_id != 0 && Auth::user()->role_id != 1) {
-            $query->where("dependency_id", Auth::user()->chief_area_id);
+        $sql = DB::table("vaccess_person");
+
+        if (Auth::user()->role_id != 1) {
+            $sql->where("insert_id", Auth::user()->id);
         }
 
-        if (Auth::user()->role_id == 2) {
-            $query->where("user_assigned_id", Auth::user()->id);
-        }
+        $sql = $sql->orderBy("id", "desc");
 
-
-        return Datatables::queryBuilder($query)->make(true);
+        return Datatables::queryBuilder($sql)->make(true);
     }
 
     public function addElement(Request $req) {

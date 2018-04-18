@@ -27,10 +27,14 @@ function access() {
                 data: data,
                 dataType: 'JSON',
                 success: function (data) {
-                    toastr.success("Registro ingresado")
-                    table.ajax.reload();
-                    $(".input-product").cleanFields();
-                    $("#frm #document").focus();
+                    if (data.status == true) {
+                        toastr.success(data.msg)
+                        table.ajax.reload();
+                        $(".input-product").cleanFields();
+                        $("#frm #document").focus();
+                    } else {
+                        toastr.error(data.msg)
+                    }
                 }
             })
         });
@@ -145,16 +149,18 @@ function access() {
 
     this.checkPerson = function () {
         var value = this.value;
-        $.ajax({
-            url: PATH + '/accessPerson/validatePerson/' + value,
-            type: 'get',
-            dataType: 'JSON',
-            success: function (data) {
-                if (data.status == true) {
-                    $(".input-product").setFields({data: data.row})
+        if (value != '') {
+            $.ajax({
+                url: PATH + '/accessPerson/validatePerson/' + value,
+                type: 'get',
+                dataType: 'JSON',
+                success: function (data) {
+                    if (data.status == true) {
+                        $(".input-product").setFields({data: data.row})
+                    }
                 }
-            }
-        })
+            })
+        }
     }
 
     this.takePhotoReception = function () {

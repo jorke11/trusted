@@ -488,12 +488,11 @@ function Client() {
     this.save = function () {
         $("#btnSave").attr("disabled", true);
         var frm = $("#frm"), passwd = true;
-        var data = frm.serialize();
         var url = "", method = "";
         var id = $("#frm #id").val();
         var msg = '';
         var validate = $(".input-clients").validate();
-        console.log(validate)
+
         if (validate.length == 0) {
             if (id == '') {
                 method = 'POST';
@@ -514,16 +513,21 @@ function Client() {
                 }
 
                 if (passwd == true) {
+
+                    var data = new FormData($("#frm")[0]);
                     $.ajax({
                         url: url,
-                        method: method,
+                        method: 'POST',
                         data: data,
                         dataType: 'JSON',
+                        processData: false,
+                        cache: false,
+                        contentType: false,
                         success: function (data) {
                             if (data.success == true) {
                                 $("#btnSave").attr("disabled", false);
                                 table.ajax.reload();
-                                toastr.success(msg);
+                                toastr.success(data.msg);
                                 $(".input-clients").setFields({data: data.header})
                             }
                         }, error: function (xhr, ajaxOptions, thrownError) {
@@ -531,6 +535,28 @@ function Client() {
                             toastr.error(xhr.responseJSON.msg);
                         }
                     })
+
+
+//                    $.ajax({
+//                        url: url,
+//                        method: method,
+//                        data: data,
+//                        dataType: 'JSON',
+//                        processData: false,
+//                        cache: false,
+//                        contentType: false,
+//                        success: function (data) {
+//                            if (data.success == true) {
+//                                $("#btnSave").attr("disabled", false);
+//                                table.ajax.reload();
+//                                toastr.success(msg);
+//                                $(".input-clients").setFields({data: data.header})
+//                            }
+//                        }, error: function (xhr, ajaxOptions, thrownError) {
+//                            $("#btnSave").attr("disabled", false);
+//                            toastr.error(xhr.responseJSON.msg);
+//                        }
+//                    })
                 } else {
                     $("#btnSave").attr("disabled", false);
                     toastr.error("La clave y la confirmación deben ser iguales!");

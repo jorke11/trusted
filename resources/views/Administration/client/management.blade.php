@@ -228,6 +228,26 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="panel">
+                            <div class="panel-heading">Configuración</div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label for="email">Titulo Aplicación</label>
+                                            <input class="form-control input-clients" id="title_main" name="title_main" type="texxt">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <div class="form-group">
+                                            <label for="email">Logo</label>
+                                            <input class="form-control input-clients" id="logo" name="logo" type="file">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
 

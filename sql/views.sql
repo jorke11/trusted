@@ -43,12 +43,13 @@ select c.id,c.description city,d.description department,c.code
 from cities c
 join departments d ON d.id=c.department_id;
 
+
 drop view vusers
 create view vusers as 
 select  users.id,users.name,users.last_name,stakeholder.business as stakeholder,users.email,users.document,r.description as role,parameters.description as status,
 users.chief_area_id,dep.description as dependency
 from users
-JOIN parameters r ON r.code=users.role_id  and r.group='roles'
+JOIN parameters r ON r.code=users.role_id  and r.group='role_id'
 LEFT JOIN stakeholder ON stakeholder.id= users.stakeholder_id
 LEFT JOIN parameters ON parameters.code = users.status_id and parameters.group='status_user'
 JOIN parameters dep ON dep.code=users.dependency_id and dep.group='dependency'
@@ -69,6 +70,7 @@ from  authorization_person a
 JOIN parameters s ON s.code=a.status_access_id and s.group = 'status_access'
 
 
+create view users as 
 SELECT users.id,
     users.name,
     users.last_name,

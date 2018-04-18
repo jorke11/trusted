@@ -126,6 +126,13 @@ class UserController extends Controller {
             } else {
                 unset($input["password"]);
             }
+
+            if (Auth::user()->role_id == 1) {
+                $input["stakeholder_id"] = $input["stakeholder_id"];
+            } else {
+                $input["stakeholder_id"] = Auth::user()->stakeholder_id;
+            }
+
 //            $user = Auth::User();
 //            $input["users_id"] = 1;
 

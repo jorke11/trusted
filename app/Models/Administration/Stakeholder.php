@@ -44,7 +44,7 @@ class Stakeholder extends Model {
         "sector_id",
         "sector_id",
         "type_stakeholder",
-        
+        "logo",
     ];
 
 }

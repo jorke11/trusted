@@ -8,6 +8,7 @@ use App\Models\Administration\Parameters;
 use App\Models\Administration\Stakeholder;
 use App\User;
 use Auth;
+use DB;
 
 class ClientController extends Controller {
 
@@ -40,22 +41,45 @@ class ClientController extends Controller {
         $type_stakeholder = Parameters::where("group", "type_stakeholder")->get();
         $status = Parameters::where("group", "generic")->get();
         $tax = Parameters::where("group", "tax")->get();
-        return view("Administration.client.init", compact('type_person', "type_regimen", "type_document", "type_stakeholder", "status", "tax","sector"));
+        return view("Administration.client.init", compact('type_person', "type_regimen", "type_document", "type_stakeholder", "status", "tax", "sector"));
     }
 
     public function store(Request $request) {
         if ($request->ajax()) {
             $input = $request->all();
+
+            $file = array_get($input, 'logo');
+
             unset($input["id"]);
             $input["user_insert"] = Auth::user()->id;
             $input["status_id"] = 1;
             $input["type_stakeholder"] = 1;
-            $result = Stakeholder::create($input);
-            if ($result) {
-                return response()->json(['success' => true]);
+            $row = Stakeholder::where("document", $input["document"])->first();
+            $type = 0;
+            if ($row != null) {
+                $type = 1;
+                $stake = Stakeholder::find($row->id);
+                $stake->fill($input)->save();
+                $result = $row->id;
             } else {
-                return response()->json(['success' => false]);
+                $result = Stakeholder::create($input)->id;
             }
+
+            if ($file != null) {
+                $name = $file->getClientOriginalName();
+                $file->move("images/stakeholder/" . $result, $name);
+                $row = Stakeholder::find($result);
+                $row->logo = $result . "/" . $name;
+                $res = $row->save();
+            }
+
+            $msg = 'Cliente Editado';
+
+            if ($type == 0) {
+                $msg = 'Cliente Registrado';
+            }
+
+            return response()->json(['success' => true, "msg" => $msg]);
         }
     }
 
@@ -145,8 +169,8 @@ class ClientController extends Controller {
 
     public function edit($id) {
         $resp["header"] = Stakeholder::FindOrFail($id);
-        $resp["images"] = $this->getImages($id)->getData();
-        $resp["taxes"] = $this->getTax($id)->getData();
+//        $resp["images"] = $this->getImages($id)->getData();
+//        $resp["taxes"] = $this->getTax($id)->getData();
         return response()->json($resp);
     }
 
@@ -449,7 +473,7 @@ class ClientController extends Controller {
         $input = $data->all();
         $stakeholder = Stakeholder::find($input["id"]);
 
-        DB::table("stakeholder_document")->where("stakeholder_id", $input["id"])->update(['main' => false]);
+//        DB::table("stakeholder_document")->where("stakeholder_id", $input["id"])->update(['main' => false]);
         $image = Administration\StakeholderDocument::where("id", $id)->update(['main' => true]);
         $image = Administration\StakeholderDocument::find($id);
         $stakeholder->image = $image->path;
