@@ -20,6 +20,7 @@ class HomeController extends Controller {
     public function index() {
 
         if (Auth::user()->role_id != 1) {
+            dd(Auth::user());
             $title_db = \App\Models\Administration\Parameters::where("group", "main_title")->first();
             $title = "Trusted";
             if ($title_db != null) {
