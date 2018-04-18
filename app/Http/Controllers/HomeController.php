@@ -22,7 +22,11 @@ class HomeController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $title = \App\Models\Administration\Parameters::where("group", "main_title")->first();
+        $title_db = \App\Models\Administration\Parameters::where("group", "main_title")->first();
+        $title = "Trusted";
+        if ($title_db != null) {
+            $title = $title_db->value;
+        }
         Session::put('title', $title->value);
         return view('home');
     }
