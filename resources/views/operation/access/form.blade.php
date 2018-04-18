@@ -207,14 +207,14 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-3">
-                        <button class="btn btn-sm" id='btnNew' style="width: 100%;padding-left: 5px;background-color: rgba(0,0,0,0.2); 
+                        <button type="button" class="btn btn-sm" id='btnNew' style="width: 100%;padding-left: 5px;background-color: rgba(0,0,0,0.2); 
                                 border:1px solid #28a745;border-radius: 5px;
                                 color:white;font-size: 17px">
                             <span class="glyphicon glyphicon-plus" aria-hidden="true"> Ingresar</span>
                         </button>
                     </div>
                     <div class="col-lg-3">
-                        <button class="btn btn-sm " id='btnSave' style="width: 100%;padding-left: 5px;background-color: rgba(0,0,0,0.2); 
+                        <button type="button" class="btn btn-sm " id='btnSave' style="width: 100%;padding-left: 5px;background-color: rgba(0,0,0,0.2); 
                                 border:1px solid #007bff;border-radius: 5px;
                                 color:white;font-size: 17px">
                             <span class="glyphicon glyphicon-ok" aria-hidden="true"> Salida</span>

@@ -32,7 +32,7 @@ class AccessController extends Controller {
 
     public function store(Request $req) {
         $in = $req->all();
-
+//        dd($in);
         $retrieved = $in["birth_date"];
         $date = \DateTime::createFromFormat('dmY', $retrieved);
         $in["birth_date"] = $date->format('Y-m-d');

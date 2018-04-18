@@ -20,7 +20,7 @@ function access() {
             var data = {};
             data = $(".input-product").getData();
             data.img = c.toDataURL("image/jpg");
-
+            
             $.ajax({
                 url: PATH + '/accessPerson',
                 type: 'POST',
