@@ -27,7 +27,7 @@ class HomeController extends Controller {
         if ($title_db != null) {
             $title = $title_db->value;
         }
-        Session::put('title', $title->value);
+        Session::put('title', $title);
         return view('home');
     }
 
