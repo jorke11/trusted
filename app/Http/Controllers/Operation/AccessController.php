@@ -27,7 +27,7 @@ class AccessController extends Controller {
         $sender = Parameters::where("group", "sender")->orderBy("description", "asc")->get();
         $status_access = Parameters::where("group", "status_access")->orderBy("description", "asc")->get();
 
-        return view("operation.access.index", compact("arl", "eps", "dependency", "element", "mark", "elements_reception", "sender","status_access"));
+        return view("operation.access.index", compact("arl", "eps", "dependency", "element", "mark", "elements_reception", "sender", "status_access"));
     }
 
     public function store(Request $req) {
@@ -70,10 +70,10 @@ class AccessController extends Controller {
             return response()->json(["status" => true]);
         }
     }
-    
+
     public function addAuthorization(Request $req) {
         $in = $req->all();
-        
+
         $result = AuthorizationPerson::create($in);
 
         if ($result) {
@@ -94,14 +94,12 @@ class AccessController extends Controller {
     }
 
     public function validatePerson($document) {
-        $row = Access::where("document", $document)->where("status_id", 1)->first();
-//        if ($row != null) {
-//            $row->status_id = 2;
-//            $row->save();
-//            return response()->json(["status" => true, "row" => $row]);
-//        } else {
-//            return response()->json(["status" => false]);
-//        }
+        $row = Access::where("document", $document)->orderBy("created_at", "desc")->first();
+        if ($row != null) {
+            return response()->json(["status" => true, "row" => $row]);
+        } else {
+            return response()->json(["status" => false]);
+        }
     }
 
 }

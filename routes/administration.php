@@ -3,6 +3,7 @@
 use App\Models;
 
 Route::resource('/parameter', 'Administration\ParametersController');
+Route::resource('/customer', 'Administration\CustomerController');
 
 Route::get('/api/listParameter', function() {
     return Datatables::queryBuilder(

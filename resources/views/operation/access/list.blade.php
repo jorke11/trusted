@@ -1,6 +1,6 @@
-<div class="row">
+<div class="row" style="padding-bottom: 1%">
     <div class="col-lg-12">
-        <div class="panel panel-default">
+        <div class="panel">
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-lg-3">Listado</div>

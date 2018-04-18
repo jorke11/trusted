@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-lg-8">
-        <div class="panel panel-default">
+        <div class="panel">
             <div class="page-title">
                 <div class="row">
                     <div class="col-lg-5 col-lg-offset-7">
@@ -34,7 +34,7 @@
                     <div class="col-lg-12">
                         <br>
                         <br>
-                        <div class="panel panel-default">
+                        <div class="panel">
                             <div class="panel-heading">Información Cuenta</div>
                             <div class="panel-body">
                                 <div class="row">
@@ -186,7 +186,7 @@
                             </div>
                         </div>
 
-                        <div class="panel panel-default">
+                        <div class="panel">
                             <div class="panel-heading">Información Envio</div>
                             <div class="panel-body">
                                 <div class="row">
@@ -208,7 +208,7 @@
 
                             </div>
                         </div>
-                        <div class="panel panel-default">
+                        <div class="panel">
                             <div class="panel-heading">Información Facturación</div>
                             <div class="panel-body">
                                 <div class="row">
@@ -277,7 +277,7 @@
 
                 </div>
                 <br>
-                <div class="row">
+                <div class="row" style="padding: 20%">
                     <div class="col-lg-12">
                         <ul class="list-group" id="listComments">
                         </ul>

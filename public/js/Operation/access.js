@@ -38,7 +38,7 @@ function access() {
         $("#btnSave").click(this.save);
         $("#btnAddParameter").click(this.addParameter);
 
-//        $("#document").blur(this.checkPerson)
+        $("#document").blur(this.checkPerson)
 
         $("#tabList").click(obj.table);
 
@@ -60,7 +60,7 @@ function access() {
     this.tabAuth = function () {
         tableReception = obj.tableAuth();
     }
-    
+
     this.tabDocument = function () {
         tableReception = obj.tableReception()
         obj.takePhotoReception();
@@ -83,7 +83,7 @@ function access() {
             }
         })
     }
-    
+
     this.saveReception = function () {
 
         var data = {};
@@ -151,7 +151,7 @@ function access() {
             dataType: 'JSON',
             success: function (data) {
                 if (data.status == true) {
-                    console.log("asd");
+                    $(".input-product").setFields({data: data.row})
                 }
             }
         })
@@ -242,7 +242,7 @@ function access() {
             ],
         });
     }
-    
+
     this.tableReception = function () {
         return $('#tblReception').DataTable({
             processing: true,
@@ -298,18 +298,19 @@ function access() {
                 {data: "dependency"},
                 {data: "authorization_person"},
                 {data: "img", render: function (data, type, row) {
-                        return '<span class="glyphicon glyphicon-eye-open" aria-hidden="true" onclick=obj.openModalPhoto(this) src=' + row.img + ' style="cursor:pointer"></span>';
+                        return '<span class="glyphicon glyphicon-eye-open" aria-hidden="true" onclick=obj.openModalPhoto(this) src=' + row.img + ' style="cursor:pointer;color:black"></span>';
                     }
                 },
                 {data: "status_id", render: function (data, type, row) {
-                        return (row.status_id == 1) ? 'Ingreso' : "Salio";
+                        return "<span style='color:black'>" + ((row.status_id == 1) ? 'Ingreso' : "Salio") + "</span>";
+
                     }
                 },
             ],
             order: [[1, 'ASC']],
             aoColumnDefs: [
                 {
-                    aTargets: [0, 1, 2, 3],
+                    aTargets: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
                     mRender: function (data, type, full) {
                         return '<a href="#" onclick="obj.showModal(' + full.id + ')">' + data + '</a>';
                     }

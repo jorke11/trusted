@@ -87,10 +87,37 @@
                     border-color: #E7E7E7;
                 }*/
 
+        html,body{
+            color:white;
+
+        }
+
+        .panel{
+            background-color: rgba(0,0,0,0.2);border-radius: 10px
+        }
+
+        .modal-content{
+            background-color:rgba(0,0,0,0.7);
+            border-color: #007bff;
+        }
+
+        .panel>.panel-heading{
+            background-color:rgba(0,0,0,0.3);
+        }
+
+        .panel>.panel-heading>*{
+            color:white;
+        }
+
+
         .navbar-custom {
-            background-color:#212121;
+            background-color:rgba(0,0,0,0.3);
             color:#ffffff;
             border-radius:0;
+        }
+
+        .navbar-default{
+            border-color: #007bff;
         }
 
         .navbar-custom .navbar-nav > li > a {
@@ -108,8 +135,24 @@
         .navbar-custom .navbar-nav > .active > a:focus,
         .navbar-custom .navbar-nav > .open >a {
             text-decoration: none;
-            background-color: white;
-            
+            background-color: rgba(0,0,0,0.3);
+            color: white;
+
+        }
+
+        .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover{
+            background-color: rgba(0,0,0,0.6);
+            color:white
+        }
+
+
+        .dropdown-menu{
+            background-color: rgba(0,0,0,0.6);
+            border-color: #007bff;
+        }
+
+        .dropdown-menu>li>a{
+            color: white;
         }
 
         .navbar-custom .navbar-brand {
@@ -121,10 +164,19 @@
         .navbar-custom .icon-bar {
             background-color:#33aa33;
         }
+        .dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing, .dataTables_wrapper .dataTables_paginate{
+            color: white;
+        }
+
 
     </style>
 
-    <body>
+    <body style='
+          background-image:url("images/fondoespacial.jpg");    height: 100%; 
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover;
+          '>
         <div id="app">
 
             <nav class="navbar navbar-custom navbar-default navbar-static-top ">
@@ -141,7 +193,7 @@
 
                         <!-- Branding Image -->
                         <a class="navbar-brand" href="{{ url('/') }}">
-                            {{ config('app.name', 'Trusted') }}
+                            {{Session::get('title')}}
                         </a>
                     </div>
 
@@ -168,6 +220,7 @@
                                     <li><a href="/city">Ciudades</a></li>
                                     <li><a href="/department">Departamentos</a></li>
                                     <li><a href="/clients">Clientes</a></li>
+                                    <li><a href="/customer">App</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">

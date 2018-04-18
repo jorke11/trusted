@@ -4,7 +4,7 @@
 
 <div class="row">
     <div class="col-lg-8">
-        <div class="panel panel-default">
+        <div class="panel">
             
             <div class="panel-body">
 
@@ -25,7 +25,7 @@
         </div>
     </div>
     <div class="col-lg-4">
-        <div class="panel panel-default">
+        <div class="panel">
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-lg-3">Parameter</div>
