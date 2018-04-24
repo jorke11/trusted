@@ -496,11 +496,11 @@ function Client() {
         if (validate.length == 0) {
             if (id == '') {
                 method = 'POST';
-                url = "clients";
+//                url = "clients";
                 msg = "Created Record";
             } else {
                 method = 'PUT';
-                url = "clients/" + id;
+//                url = "clients/" + id;
                 msg = "Edited Record";
             }
 
@@ -516,7 +516,7 @@ function Client() {
 
                     var data = new FormData($("#frm")[0]);
                     $.ajax({
-                        url: url,
+                        url: "clients",
                         method: 'POST',
                         data: data,
                         dataType: 'JSON',
@@ -586,6 +586,7 @@ function Client() {
             success: function (data) {
                 $(".input-clients").cleanFields();
                 $(".input-clients").setFields({data: data.header});
+                $("#imglogo").attr("src", data.header.logo)
                 obj.printImages(data.images);
                 obj.tableComment(data.comments);
             },
@@ -782,7 +783,7 @@ function Client() {
                     defaultContent: '',
                     searchable: false,
                 },
-                
+
                 {data: "business_name"},
                 {data: "business"},
                 {data: "document"},

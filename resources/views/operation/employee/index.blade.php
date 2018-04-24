@@ -13,18 +13,13 @@
         <!-- Tab panes -->
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active " id="access_control">
-                @include('operation.access.form')
-                @include('operation.access.list')
-            </div>
-            <div role="tabpanel" class="tab-pane" id="authotization">
-                @include('operation.access.authorization')
+                @include('operation.employee.form')
+                @include('operation.employee.list')
             </div>
 
         </div>
     </div>
 </div>
 
-@include('operation.access.modalParameters')
-
-{!!Html::script('js/Operation/access.js')!!}
+{!!Html::script('js/Operation/employee.js')!!}
 @endsection

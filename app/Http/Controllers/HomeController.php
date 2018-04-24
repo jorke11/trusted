@@ -19,22 +19,30 @@ class HomeController extends Controller {
      */
     public function index() {
 
+//        dd(\App\Models\Administration\Stakeholder::all());
         $row = \App\Models\Administration\Stakeholder::find(Auth::user()->stakeholder_id);
         Session::put('logo', $row->logo);
 
-        if (Auth::user()->role_id == 1) {
-            $title_db = \App\Models\Administration\Parameters::where("group", "main_title")->first();
-            $title = "Trusted";
+        $title = "Trusted";
+        $logo = "";
 
-            if ($title_db != null) {
-                $title = $title_db->value;
-            }
+        if ($row->title_main != null) {
+            $title = $row->title_main;
+        }
+        if ($row->logo != null) {
+            $logo = $row->thumbnail;
+        }
 
-            Session::put('title', $title);
+        Session::put('title', $title);
+        Session::put('logo', $logo);
+
+
+        if (Auth::user()->role_id == 3) {
+            return redirect("accessPerson");
+        } else {
+
 
             return view('home');
-        } else {
-            return redirect("accessPerson");
         }
     }
 

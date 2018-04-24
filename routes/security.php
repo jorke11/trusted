@@ -1,8 +1,6 @@
 <?php
 
-Route::get('/api/listUser', function() {
-    return Datatables::queryBuilder(DB::table("vusers"))->make(true);
-});
+Route::get('/api/listUser', 'Security\UserController@listUser');
 Route::post('/user/uploadExcel', 'Security\UserController@storeExcel');
 Route::put('/user', 'Security\UserController@store');
 Route::resource('/user', 'Security\UserController');

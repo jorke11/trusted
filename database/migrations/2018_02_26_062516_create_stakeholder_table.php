@@ -4,14 +4,14 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateStakeholderTable extends Migration
-{
+class CreateStakeholderTable extends Migration {
+
     /**
      * Run the migrations.
      *
      * @return void
      */
-   public function up() {
+    public function up() {
         Schema::create('stakeholder', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('type_regime_id')->nullable();
@@ -46,7 +46,10 @@ class CreateStakeholderTable extends Migration
             $table->integer('lead_time')->nullable();
             $table->integer("user_insert");
             $table->integer("user_update")->nullable();
-            
+            $table->text("title_main")->nullable();
+            $table->text("logo")->nullable();
+            $table->text("thumbnail")->nullable();
+
             $table->rememberToken();
             $table->timestamps();
         });
@@ -60,4 +63,5 @@ class CreateStakeholderTable extends Migration
     public function down() {
         Schema::dropIfExists('stakeholder');
     }
+
 }

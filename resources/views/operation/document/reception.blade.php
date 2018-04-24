@@ -1,20 +1,8 @@
 <div class="panel panel-default">
-    <div class="page-title" style="">
-        <div class="row">
-            <div class="col-lg-12 text-right">
-                <button class="btn btn-primary btn-sm" id='btnNewReception'>
-                    <span class="glyphicon glyphicon-plus" aria-hidden="true"> Limpiar</span>
-                </button>
-                <button class="btn btn-success btn-sm" id='btnSaveReception'>
-                    <span class="glyphicon glyphicon-ok" aria-hidden="true"> Ingresar</span>
-                </button>
-            </div>
-        </div>
-    </div>
     <div class="panel-body">
         {!! Form::open(['id'=>'frmReception','files' => true]) !!}
         <input id="id" name="id" type="hidden" class="input-reception">
-        <div class="row">
+        <div class="row" style="padding-bottom: 20px">
             <div class="col-lg-7">
                 <div class="panel panel-default">
                     <div class="panel-heading personal">
@@ -86,7 +74,8 @@
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="description" class="control-label">Para</label>
-                                    <input type="text" class="form-control input-reception input-sm" id="received_id" name='received_id' required>
+                                    <select class="form-control input-reception" id="received_id" name='received_id'>
+                                    </select>                         
                                 </div>
                             </div>
                             <div class="col-lg-4">
@@ -100,15 +89,30 @@
                 </div>
             </div>
             <div class="col-lg-5">
-                <div class="row">
+                <div class="row" style="padding-bottom: 20px">
                     <div class="col-lg-6">
-                        <video id="camReception" width="400" height="300" autoplay="autoplay" style="border:1px solid #ccc;" >
+                        <video id="cam" width="370" height="300" autoplay="autoplay" style="border:1px solid #ccc;border-radius: 10px" >
                         </video>
-
                     </div>
                     <div class="col-lg-6 hidden" >
                         <canvas id="canvas" width="400" height="300" style="border:1px solid #ccc;">
                         </canvas>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3">
+                        <button type="button" class="btn btn-sm" id='btnNew' style="width: 100%;padding-left: 5px;background-color: rgba(0,0,0,0.2); 
+                                border:1px solid #28a745;border-radius: 5px;
+                                color:white;font-size: 17px">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"> Nuevo</span>
+                        </button>
+                    </div>
+                    <div class="col-lg-3">
+                        <button type="button" class="btn btn-sm " id='btnSave' style="width: 100%;padding-left: 5px;background-color: rgba(0,0,0,0.2); 
+                                border:1px solid #007bff;border-radius: 5px;
+                                color:white;font-size: 17px">
+                            <span class="glyphicon glyphicon-ok" aria-hidden="true"> Ingresar</span>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -134,7 +138,7 @@
                                     <th>Dependencia</th>
                                     <th>Para</th>
                                     <th>Observaciones</th>
-                                    <th>Action</th>
+                                    <th>Entregar</th>
                                 </tr>
                             </thead>
                             <tbody>

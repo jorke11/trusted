@@ -102,7 +102,7 @@
 
                 <div class="links icons">
                     <div class="row">
-                        <div class="col-lg-6">
+                        <div class="col-lg-4">
                             <div class="row">
                                 <div class="col-lg-12">
                                     <a href={{url("login")}}>
@@ -118,7 +118,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-4">
                             <div class="row">
                                 <div class="col-lg-12">
                                     <a href={{url("login")}}>
@@ -131,6 +131,22 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <h2 style="color:#ff9900">Control de <br>Acceso</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <a href={{url("login")}}>
+                                        <svg id="i-file" style="color:#ff9900" viewBox="0 0 32 32" width="100" height="100" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                                        <path d="M6 2 L6 30 26 30 26 10 18 2 Z M18 2 L18 10 26 10" />
+                                        <circle cx="16" cy="24" r="1" />
+                                        </svg></a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <h2 style="color:#ff9900">Recepción de <br>Documentos</h2>
                                 </div>
                             </div>
                         </div>

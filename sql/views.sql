@@ -1,7 +1,7 @@
 drop view vaccess_person
 create view vaccess_person as
 select a.id,a.first_name,a.second_name,a.last_name,a.second_surname,a.gender,a.document,a.birth_date,a.type_blood,eps.description as eps,
-arl.description as arl,a.status_id,a.created_at,a.updated_at,dep.description as dependency,a.authorization_person,a,insert_id
+arl.description as arl,a.status_id,a.created_at,a.updated_at,dep.description as dependency,a.authorization_person,a.insert_id,a.img
 from  access_person a
 LEFT JOIN parameters eps ON eps.code=eps_id and eps.group ='eps'
 LEFT JOIN parameters arl ON arl.code=arl_id and arl.group ='arl'
@@ -46,22 +46,23 @@ join departments d ON d.id=c.department_id;
 drop view vusers
 create view vusers as 
 select  users.id,users.name,users.last_name,stakeholder.business as stakeholder,users.email,users.document,r.description as role,parameters.description as status,
-users.chief_area_id,dep.description as dependency
+users.chief_area_id,dep.description as dependency,role_id,users.stakeholder_id
 from users
 JOIN parameters r ON r.code=users.role_id  and r.group='role_id'
 LEFT JOIN stakeholder ON stakeholder.id= users.stakeholder_id
 LEFT JOIN parameters ON parameters.code = users.status_id and parameters.group='status_user'
-JOIN parameters dep ON dep.code=users.dependency_id and dep.group='dependency'
+left JOIN parameters dep ON dep.code=users.dependency_id and dep.group='dependency'
 
 
 drop view vreception_elements
 create view vreception_elements as 
-select r.id,r.observation,elem.description as reception_element,dep.description as dependency,s.description as sender,r.received_id
+select r.id,r.observation,elem.description as reception_element,dep.description as dependency,s.description as sender,r.received_id,r.stakeholder_id,u.name as received,
+r.observation_delivery,r.img_delivery,r.status_id
 from reception_elements r
 JOIN parameters elem ON elem.code=r.reception_element_id and elem.group = 'element_reception'
 JOIN parameters dep ON dep.code=r.dependency_id and dep.group = 'dependency'
 JOIN parameters s ON s.code=r.sender_id and s.group = 'sender'
-
+JOIN users u On u.id=r.received_id
 
 create view vauthorization_person as 
 select a.id,a.document,s.description as status,a.reason

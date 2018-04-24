@@ -9,6 +9,9 @@ use App\Models\Administration\Stakeholder;
 use App\User;
 use Auth;
 use DB;
+use Intervention\Image\ImageManager;
+use File;
+use Input;
 
 class ClientController extends Controller {
 
@@ -67,10 +70,37 @@ class ClientController extends Controller {
 
             if ($file != null) {
                 $name = $file->getClientOriginalName();
-                $file->move("images/stakeholder/" . $result, $name);
+                
+                
+                $manager = new ImageManager(array('driver' => 'imagick'));
+
+                $image = $manager->make($file)->widen(700);
+                $imagethumb = $manager->make($file)->resize(30, 30);
+
+                $path = public_path() . "/images/stakeholder/" . $result . "/";
+                File::makeDirectory($path, $mode = 0777, true, true);
+                chmod($path, 0777);
+
+                $paththumb = public_path() . "/images/stakeholder/" . $result . "/thumb/";
+                File::makeDirectory($paththumb, $mode = 0777, true, true);
+                chmod($paththumb, 0777);
+
+                $pathsys = "images/stakeholder/" . $result . "/";
+                $pathsysthumb = "images/stakeholder/" . $result . "/thumb/";
+
+                $path .= $name;
+                $pathsys .= $name;
+
+                $paththumb .= $name;
+                $pathsysthumb .= $name;
+
+                $image->save($path);
+                $imagethumb->save($paththumb);
+
                 $row = Stakeholder::find($result);
-                $row->logo = $result . "/" . $name;
-                $res = $row->save();
+                $row->logo = $pathsys;
+                $row->thumbnail = $pathsysthumb;
+                $row->save();
             }
 
             $msg = 'Cliente Editado';

@@ -20,8 +20,13 @@ Route::get('/api/listAccess', 'Operation\AccessController@listAccess');
 Route::get('api/listAuth', function() {
     return Datatables::queryBuilder(DB::table("vauthorization_person")->orderBy("id", "desc"))->make(true);
 });
-Route::get('api/listReception', function() {
-    return Datatables::queryBuilder(DB::table("vreception_elements")->orderBy("id", "desc"))->make(true);
-});
 
 Route::get('/api/listTicket', 'Operation\TicketController@listAccess');
+
+Route::get('api/listReception', 'Operation\DocumentController@listElements');
+Route::resource('inputDocument', 'Operation\DocumentController');
+Route::get('inputDocument/getUserDependency/{id}', 'Operation\DocumentController@getUserDependency');
+
+Route::resource('employee', 'Operation\EmployeeController');
+Route::post('employee/upload', 'Operation\EmployeeController@uploadEmployee');
+Route::get('api/listEmployee', 'Operation\EmployeeController@listEmployee');

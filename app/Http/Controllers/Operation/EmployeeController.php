@@ -14,24 +14,23 @@ use Auth;
 use DB;
 use Datatables;
 use Session;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Models\Operation\Employee;
 
-class AccessController extends Controller {
+class EmployeeController extends Controller {
+
+    public $updated;
+    public $inserted;
 
     public function __construct() {
         $this->middleware("auth");
+
+        $this->updated = 0;
+        $this->inserted = 0;
     }
 
     public function index() {
-        $arl = Parameters::where("group", "arl")->where("stakeholder_id", Auth::user()->stakeholder_id)->orderBy("description", "asc")->get();
-        $eps = Parameters::where("group", "eps")->where("stakeholder_id", Auth::user()->stakeholder_id)->orderBy("description", "asc")->get();
-        $dependency = Parameters::where("group", "dependency")->where("stakeholder_id", Auth::user()->stakeholder_id)->orderBy("description", "asc")->get();
-        $element = Parameters::where("group", "element")->where("stakeholder_id", Auth::user()->stakeholder_id)->orderBy("description", "asc")->get();
-        $mark = Parameters::where("group", "mark")->where("stakeholder_id", Auth::user()->stakeholder_id)->orderBy("description", "asc")->get();
-        $elements_reception = Parameters::where("group", "element_reception")->where("stakeholder_id", Auth::user()->stakeholder_id)->orderBy("description", "asc")->get();
-        $sender = Parameters::where("group", "sender")->where("stakeholder_id", Auth::user()->stakeholder_id)->orderBy("description", "asc")->get();
-        $status_access = Parameters::where("group", "status_access")->where("stakeholder_id", Auth::user()->stakeholder_id)->orderBy("description", "asc")->get();
-
-        return view("operation.access.index", compact("arl", "eps", "dependency", "element", "mark", "elements_reception", "sender", "status_access"));
+        return view("operation.employee.index");
     }
 
     public function store(Request $req) {
@@ -75,17 +74,49 @@ class AccessController extends Controller {
         }
     }
 
-    public function listAccess() {
+    public function uploadEmployee(Request $req) {
 
-        $sql = DB::table("vaccess_person");
+        $this->in = $req->all();
+        $this->name = '';
+        $this->path = '';
+        $file = array_get($this->in, 'file_employee');
 
-        if (Auth::user()->role_id != 1) {
-            $sql->where("insert_id", Auth::user()->id);
-        }
 
-        $sql = $sql->orderBy("id", "desc");
+        $this->name = $file->getClientOriginalName();
+        $this->name = str_replace(" ", "_", $this->name);
+        $this->path = "uploads/employee/" . date("Y-m-d") . "/" . $this->name;
 
-        return Datatables::queryBuilder($sql)->make(true);
+
+        $file->move("uploads/employee/" . date("Y-m-d") . "/", $this->name);
+        $error = array();
+        Excel::load($this->path, function($reader) {
+            foreach ($reader->get() as $book) {
+
+                $new["document"] = $book->cedula;
+                $new["name"] = $book->nombre;
+                $new["last_name"] = $book->apellido;
+                $new["position"] = $book->cargo;
+                $new["stakeholder_id"] = Auth::user()->stakeholder_id;
+                $new["status_id"] = 1;
+
+                $row = Employee::where("document", $book->cedula)->first();
+
+                if ($row != null) {
+                    $emp = Employee::find($row->id);
+                    $emp->fill($new)->save();
+                    $this->updated++;
+                } else {
+                    Employee::create($new);
+                    $this->inserted++;
+                }
+            }
+        })->get();
+
+        return response()->json(["success" => true, "inserted" => $this->inserted, "updated" => $this->updated, "error" => $error]);
+    }
+
+    public function listEmployee() {
+        return Datatables::eloquent(Employee::where("stakeholder_id", Auth::user()->stakeholder_id))->make(true);
     }
 
     public function addAuthorization(Request $req) {

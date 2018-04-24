@@ -5,19 +5,19 @@
     <div class="row">
         <div class="col-lg-3">
             <div class="form-group">
-                <label for="email">Name:</label>
+                <label for="email">Noombres:</label>
                 <input type="text" class="form-control input-user" id="name" name='name' required>
             </div>
         </div>
         <div class="col-lg-3">
             <div class="form-group">
-                <label for="email">Last Name:</label>
+                <label for="email">Apellidos:</label>
                 <input type="text" class="form-control input-user" id="last_name" name='last_name' required>
             </div>
         </div>
         <div class="col-lg-3">
             <div class="form-group">
-                <label for="email">Document:</label>
+                <label for="email">Documento:</label>
                 <input type="text" class="form-control input-user" id="document" name='document'>
             </div>
         </div>

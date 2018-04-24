@@ -110,7 +110,7 @@
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label for="address">Ciudad</label>
-                                            <select class="form-control input-clients input-sm"  id="city_id" name="city_id" data-api="/api/getCity" disabled>
+                                            <select class="form-control input-clients input-sm"  id="city_id" name="city_id" data-api="/api/getCity" disabled style="width: 100%">
                                             </select>
                                         </div>
                                     </div>
@@ -123,7 +123,7 @@
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label for="address" class="control-label">Responsable</label>
-                                            <select class="form-control input-clients"  id="responsible_id" name="responsible_id" data-api="/api/getResponsable" required disabled>
+                                            <select class="form-control input-clients"  id="responsible_id" name="responsible_id" data-api="/api/getResponsable" required disabled style="width: 100%">
                                             </select>
                                         </div>
                                     </div>
@@ -148,7 +148,7 @@
                                             <div class="col-lg-10 col-md-8">
                                                 <div class="form-group">
                                                     <label for="address">Cuenta Principal</label>
-                                                    <select class="form-control input-clients"  id="stakeholder_id" name="stakeholder_id" data-api="/api/getClient" disabled>
+                                                    <select class="form-control input-clients"  id="stakeholder_id" name="stakeholder_id" data-api="/api/getClient" disabled style="width: 95%">
                                                     </select>
                                                 </div>
                                             </div>
@@ -193,14 +193,14 @@
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label for="email">Ciudad Envio *</label>
-                                            <select class="form-control input-clients input-sm" id="send_city_id" name="send_city_id" data-api="/api/getCity" required disabled>
+                                            <select class="form-control input-clients input-sm" id="send_city_id" name="send_city_id" data-api="/api/getCity" required disabled style="width: 95%">
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-lg-8">
                                         <div class="form-group">
                                             <label for="email">Dirección Envio *</label>
-                                            <input class="form-control input-clients input-sm" id="address_send" name="address_send" required disabled>    
+                                            <input class="form-control input-clients input-sm" id="address_send" name="address_send" required disabled >    
                                         </div>
                                     </div>
                                 </div>
@@ -215,7 +215,7 @@
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label for="email">Ciudad Facturación</label>
-                                            <select class="form-control input-clients input-sm" id="invoice_city_id" name="invoice_city_id" data-api="/api/getCity" disabled>
+                                            <select class="form-control input-clients input-sm" id="invoice_city_id" name="invoice_city_id" data-api="/api/getCity" disabled style="width: 95%">
                                             </select>
                                         </div>
                                     </div>
@@ -236,7 +236,7 @@
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label for="email">Titulo Aplicación</label>
-                                            <input class="form-control input-clients" id="title_main" name="title_main" type="texxt">
+                                            <input class="form-control input-clients" id="title_main" name="title_main" type="text">
                                         </div>
                                     </div>
                                     <div class="col-lg-8">
@@ -244,6 +244,14 @@
                                             <label for="email">Logo</label>
                                             <input class="form-control input-clients" id="logo" name="logo" type="file">
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-4">
+
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <img src="" id="imglogo" >
                                     </div>
                                 </div>
                             </div>

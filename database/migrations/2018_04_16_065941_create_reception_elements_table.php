@@ -19,6 +19,9 @@ class CreateReceptionElementsTable extends Migration {
             $table->integer('sender_id');
             $table->integer('dependency_id');
             $table->integer('received_id');
+            $table->integer('stakeholder_id');
+            $table->integer('status_id');
+            $table->text('img');
             $table->timestamps();
         });
     }

@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Models\Uploads\Base;
 use Mail;
+use Datatables;
 
 class UserController extends Controller {
 
@@ -31,13 +32,32 @@ class UserController extends Controller {
     }
 
     public function index() {
-        $roles = Parameters::where("group", "role_id")->get();
-        $dependency = Parameters::where("group", "dependency")->get();
+        $roles = Parameters::where("group", "role_id");
+
+        if (Auth::user()->role_id == 2) {
+            $roles->where("code", "!=", "1");
+        } else if (Auth::user()->role_id == 3) {
+            $roles->whereNotIn("code", array(1, 2));
+        }
+
+        $roles = $roles->orderBy("code", "asc")->get();
+
+        $dependency = Parameters::where("group", "dependency")->where("stakeholder_id", Auth::user()->stakeholder_id)->get();
         return view("Security.user.init", compact("roles", "dependency"));
     }
 
     public function create() {
         return "create";
+    }
+
+    public function listUser() {
+        $sql = DB::table("vusers");
+
+        if (Auth::user()->role_id == 2) {
+            $sql->whereIn("role_id", array(2, 3))->where("stakeholder_id", Auth::user()->stakeholder_id);
+        }
+
+        return Datatables::queryBuilder($sql)->make(true);
     }
 
     public function storeExcel(Request $request) {

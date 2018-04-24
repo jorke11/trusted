@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Administration;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Administration\Parameters;
+use Auth;
 
 class ParametersController extends Controller {
 
@@ -26,13 +27,13 @@ class ParametersController extends Controller {
             unset($input["id"]);
 //            $user = Auth::User();
 //            $input["users_id"] = 1;
-
+            $input["stakeholder_id"] = Auth::user()->stakeholder_id;
             $max = Parameters::where("group", $input["group"])->max("code");
             $input["code"] = $max + 1;
 
             $result = Parameters::create($input);
             if ($result) {
-                $detail = Parameters::where("group", $input["group"])->get();
+                $detail = Parameters::where("group", $input["group"])->where("stakeholder_id", $input["stakeholder_id"])->get();
                 return response()->json(['success' => true, "detail" => $detail]);
             } else {
                 return response()->json(['success' => false]);
@@ -48,6 +49,7 @@ class ParametersController extends Controller {
     public function update(Request $request, $id) {
         $category = Parameters::FindOrFail($id);
         $input = $request->all();
+
         $result = $category->fill($input)->save();
         if ($result) {
             return response()->json(['success' => true]);
