@@ -193,6 +193,10 @@ function Client() {
         });
         $("#btnComment").click(this.addCommnet);
         $("#btnUpload_code").click(this.uploadExcelCode)
+        
+        $("#tabPersonal").click(function(){
+            obj.tablePersonal();
+        })
 
     }
 
@@ -528,7 +532,7 @@ function Client() {
                                 $("#btnSave").attr("disabled", false);
                                 table.ajax.reload();
                                 toastr.success(data.msg);
-                                $(".input-clients").setFields({data: data.header})
+                                $(".input-clients").cleanFields()
                             }
                         }, error: function (xhr, ajaxOptions, thrownError) {
                             $("#btnSave").attr("disabled", false);

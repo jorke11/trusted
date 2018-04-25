@@ -14,6 +14,8 @@ use Auth;
 use DB;
 use Datatables;
 use Session;
+use App\Models\Operation\EmployeeLog;
+use App\Models\Operation\Employee;
 
 class AccessController extends Controller {
 
@@ -37,41 +39,63 @@ class AccessController extends Controller {
     public function store(Request $req) {
         $in = $req->all();
 
-        $person = Access::where("document", $in["document"])->where("status_id", 1)->first();
 
-        if ($person == null) {
+        $emp = Employee::where("document", $in["document"])->where("stakeholder_id", Auth::user()->stakeholder_id)->first();
 
-            $retrieved = $in["birth_date"];
-            $date = \DateTime::createFromFormat('dmY', $retrieved);
-            $in["birth_date"] = $date->format('Y-m-d');
-
-            $path = public_path() . "/images/" . date("Y-m-d");
-            $pathsys = "images/" . date("Y-m-d");
-
-            $res = File::makeDirectory($path, $mode = 0777, true, true);
-            $manager = new ImageManager(array('driver' => 'imagick'));
-
-            $image = $manager->make($in["img"])->widen(400);
-            $pathsys .= "/" . $in["document"] . ".jpg";
-            $path .= "/" . $in["document"] . ".jpg";
+        if ($emp == null) {
+            $person = Access::where("document", $in["document"])->where("insert_id", Auth::user()->id)->where("status_id", 1)->first();
 
 
-            $in["img"] = url($pathsys);
-            $in["birth_date"] = date("Y-m-d", strtotime($in["birth_date"]));
-            $in["status_id"] = 1;
+            if ($person == null) {
 
-            unset($in["id"]);
+                $retrieved = $in["birth_date"];
+                $date = \DateTime::createFromFormat('dmY', $retrieved);
+                $in["birth_date"] = $date->format('Y-m-d');
 
-            if ($in["mark_id"] == "null") {
-                unset($in["mark_id"]);
+                $path = public_path() . "/images/" . date("Y-m-d");
+                $pathsys = "images/" . date("Y-m-d");
+
+                $res = File::makeDirectory($path, $mode = 0777, true, true);
+                $manager = new ImageManager(array('driver' => 'imagick'));
+
+                $image = $manager->make($in["img"])->widen(400);
+                $pathsys .= "/" . $in["document"] . ".jpg";
+                $path .= "/" . $in["document"] . ".jpg";
+
+
+                $in["img"] = url($pathsys);
+                $in["birth_date"] = date("Y-m-d", strtotime($in["birth_date"]));
+                $in["status_id"] = 1;
+                $in["insert_id"] = Auth::user()->id;
+                unset($in["id"]);
+
+                if ($in["mark_id"] == "null") {
+                    unset($in["mark_id"]);
+                }
+
+                $image->save($path);
+                $row = Access::create($in);
+
+                return response()->json(["status" => true, "row" => $row, "msg" => "Registro ingresado"]);
+            } else {
+                return response()->json(["status" => false, "msg" => "Persona ingresada, tienes que darle salida antes de ingresarlo de nuevo"]);
             }
-
-            $image->save($path);
-            $row = Access::create($in);
-
-            return response()->json(["status" => true, "row" => $row, "msg" => "Registro ingresado"]);
         } else {
-            return response()->json(["status" => false, "msg" => "Persona ingresada, tienes que darle salida antes de ingresarlo de nuevo"]);
+
+            $log = EmployeeLog::where("employee_id", $emp->id)->where("status_id", 1)->first();
+
+            if ($log != null) {
+                $row = EmployeeLog::find($log->id);
+                $row->status_id = 2;
+                $row->save();
+                return response()->json(["status" => true, "row" => $row, "msg" => "Registro Actualizado"]);
+            } else {
+                $new["stakeholder_id"] = Auth::user()->stakeholder_id;
+                $new["status_id"] = 1;
+                $new["employee_id"] = $emp->id;
+                EmployeeLog::create($new);
+                return response()->json(["status" => true, "msg" => "Registro Ingresado"]);
+            }
         }
     }
 
@@ -99,7 +123,7 @@ class AccessController extends Controller {
     }
 
     public function update($document) {
-        $row = Access::where("document", $document)->where("status_id", 1)->first();
+        $row = Access::where("document", $document)->where("insert_id", Auth::user()->id)->where("status_id", 1)->first();
 
         if ($row != null) {
             $row->status_id = 2;
@@ -108,6 +132,12 @@ class AccessController extends Controller {
         } else {
             return response()->json(["status" => false, "msg" => "Documento no se encuentra registrado en nuestro sistema"], 409);
         }
+    }
+
+    public function listEmployeeLog() {
+        $query = EmployeeLog::select("employee_log.id", "employee.document", "employee_log.created_at", "employee_log.updated_at","employee_log.status_id")
+                        ->join("employee", "employee.id", "employee_log.employee_id")->where("employee_log.stakeholder_id", Auth::user()->stakeholder_id);
+        return Datatables::eloquent($query)->make(true);
     }
 
     public function validatePerson($document) {

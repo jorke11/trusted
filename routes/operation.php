@@ -30,3 +30,6 @@ Route::get('inputDocument/getUserDependency/{id}', 'Operation\DocumentController
 Route::resource('employee', 'Operation\EmployeeController');
 Route::post('employee/upload', 'Operation\EmployeeController@uploadEmployee');
 Route::get('api/listEmployee', 'Operation\EmployeeController@listEmployee');
+
+Route::get('api/listEmployeeLog', 'Operation\AccessController@listEmployeeLog');
+

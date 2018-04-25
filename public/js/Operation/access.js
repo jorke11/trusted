@@ -54,11 +54,61 @@ function access() {
 
         $("#btnSaveAuth").click(this.saveAuth);
         $("#btnNewAuth").click(this.newAuth)
+
+
+        $("#tabPersonal").click(function () {
+            obj.tablePersonal()
+        })
     }
 
     this.newAuth = function () {
         $(".input-auth").cleanFields()
     }
+
+
+    this.tablePersonal = function () {
+        return $('#tblPersonal').DataTable({
+            processing: true,
+            serverSide: true,
+            destroy: true,
+            ajax: "/api/listEmployeeLog",
+            columns: [
+                {data: "id"},
+                {data: "document"},
+                {data: "created_at"},
+                {data: "updated_at"},
+                {data: "status_id"},
+            ],
+            order: [[1, 'ASC']],
+            aoColumnDefs: [
+                {
+                    aTargets: [0, 1, 2, 3, 4],
+                    mRender: function (data, type, full) {
+                        return '<a href="#" onclick="obj.showModal(' + full.id + ')">' + data + '</a>';
+                    }
+                },
+                {
+                    targets: 5,
+                    searchable: false,
+                    mData: null,
+                    mRender: function (data, type, full) {
+
+//                        var html = ''
+//                        if (data.status_id == 2) {
+//                            html = '<button class="btn btn-success btn-xs" onclick=obj.openModalDeliveryStatus("' + $.trim(data.img_delivery) + '","' + (data.observation_delivery).replace(/ /g, "@#") + '") type="button"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button>';
+//
+//                        } else {
+//                            html = '<button class="btn btn-info btn-xs" onclick="obj.openModalDelivery(' + data.id + ')" type="button"><span class="glyphicon glyphicon-send" aria-hidden="true"></span></button>';
+//                        }
+
+//                        return html
+                        return ""
+                    }
+                }
+            ],
+        });
+    }
+
 
 
     this.tabAuth = function () {

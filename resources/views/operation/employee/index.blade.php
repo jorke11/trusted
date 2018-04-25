@@ -16,7 +16,6 @@
                 @include('operation.employee.form')
                 @include('operation.employee.list')
             </div>
-
         </div>
     </div>
 </div>
