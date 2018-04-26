@@ -55,15 +55,23 @@
                                 <div class="row">
                                     <div class="col-lg-4">
                                         <div class="form-group">
-                                            <label for="address" class="control-label">Tipo Documento *</label>
-                                            <select id="type_document" name="type_document" class="form-control input-clients input-sm" required disabled>
-                                                <option value="0">Selección</option>
-                                                @foreach($type_document as $val)
-                                                <option value="{{$val->code}}">{{$val->description}}</option>
-                                                @endforeach
-                                            </select>
+                                            <label for="email">Tipo Documento </label>
+                                            <div class="input-group input-group-sm">
+                                                <select class="form-control input-product" id="type_document" name='type_document'>
+                                                    <option value="0">Seleccione</option>
+                                                    @foreach($type_document as $val)
+                                                    <option value="{{$val->code}}">{{$val->description}}</option>
+                                                    @endforeach
+                                                </select>
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-primary" type="button" onclick="obj.showModalParameter('type_document', 'type_document')">
+                                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                                    </button>
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
+
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label for="address" class="control-label">Documento *</label>
@@ -82,24 +90,40 @@
                                     <input type="hidden" id="id" name="id" class="input-clients">
                                     <div class="col-lg-4">
                                         <div class="form-group">
-                                            <label for="address" class="control-label">Tipo Persona*</label>
-                                            <select class="form-control input-clients input-sm"  id="type_regime_id" name="type_regime_id" required disabled>
-                                                <option value="0">Selección</option>
-                                                @foreach($type_person as $val)
-                                                <option value="{{$val->code}}">{{$val->description}}</option>
-                                                @endforeach
-                                            </select>
+                                            <label for="email">Tipo Persona</label>
+                                            <div class="input-group input-group-sm">
+                                                <select class="form-control input-product" id="type_regime_id" name='type_regime_id'>
+                                                    <option value="0">Seleccione</option>
+                                                    @foreach($type_person as $val)
+                                                    <option value="{{$val->code}}">{{$val->description}}</option>
+                                                    @endforeach
+                                                </select>
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-primary" type="button" onclick="obj.showModalParameter('type_regime', 'type_regime_id')">
+                                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                                    </button>
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
+
+
                                     <div class="col-lg-4">
                                         <div class="form-group">
-                                            <label for="address" class="control-label">Tipo Regimen*</label>
-                                            <select id="type_person_id" name="type_person_id" class="form-control input-clients input-sm" required disabled>
-                                                <option value="0">Selección</option>
-                                                @foreach($type_regimen as $val)
-                                                <option value="{{$val->code}}">{{$val->description}}</option>
-                                                @endforeach
-                                            </select>
+                                            <label for="email">Tipo Regimen</label>
+                                            <div class="input-group input-group-sm">
+                                                <select class="form-control input-product" id="type_person_id" name='type_person_id'>
+                                                    <option value="0">Seleccione</option>
+                                                    @foreach($type_regimen as $val)
+                                                    <option value="{{$val->code}}">{{$val->description}}</option>
+                                                    @endforeach
+                                                </select>
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-primary" type="button" onclick="obj.showModalParameter('type_person', 'type_person_id')">
+                                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                                    </button>
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
 
@@ -164,14 +188,14 @@
                                         <div class="form-group">
                                             <label for="email">Sector</label>
                                             <div class="input-group input-group-sm">
-                                                <select class="form-control input-product" id="eps_id" name='eps_id'>
+                                                <select class="form-control input-product" id="sector_id" name='sector_id'>
                                                     <option value="0">Seleccione</option>
                                                     @foreach($sector as $val)
                                                     <option value="{{$val->code}}">{{$val->description}}</option>
                                                     @endforeach
                                                 </select>
                                                 <span class="input-group-btn">
-                                                    <button class="btn btn-primary" type="button" onclick="obj.showModalParameter('sectors', 'eps_id')">
+                                                    <button class="btn btn-primary" type="button" onclick="obj.showModalParameter('sectors', 'sector_id')">
                                                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                                                     </button>
                                                 </span>
