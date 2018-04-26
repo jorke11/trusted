@@ -159,15 +159,23 @@
                                     </div>
                                 </div>
                                 <div class="row">
+
                                     <div class="col-lg-4">
                                         <div class="form-group">
-                                            <label for="address" class="control-label">Sector *</label>
-                                            <select id="sector_id" name="sector_id" class="form-control input-clients input-sm" required="" >
-                                                <option value="0">Selección</option>
-                                                @foreach($sector as $val)
-                                                <option value="{{$val->code}}">{{$val->description}}</option>
-                                                @endforeach
-                                            </select>
+                                            <label for="email">Sector</label>
+                                            <div class="input-group input-group-sm">
+                                                <select class="form-control input-product" id="eps_id" name='eps_id'>
+                                                    <option value="0">Seleccione</option>
+                                                    @foreach($sector as $val)
+                                                    <option value="{{$val->code}}">{{$val->description}}</option>
+                                                    @endforeach
+                                                </select>
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-primary" type="button" onclick="obj.showModalParameter('sectors', 'eps_id')">
+                                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                                    </button>
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-4">

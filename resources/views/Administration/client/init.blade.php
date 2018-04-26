@@ -52,5 +52,8 @@
         </div>
     </div>
 </div>
+
+@include('operation.access.modalParameters')
+
 {!!Html::script('js/Administration/Client.js')!!}
 @endsection
