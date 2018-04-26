@@ -195,7 +195,7 @@
                                                     @endforeach
                                                 </select>
                                                 <span class="input-group-btn">
-                                                    <button class="btn btn-primary" type="button" onclick="obj.showModalParameter('sectors', 'sector_id')">
+                                                    <button class="btn btn-primary" type="button" onclick="obj.showModalParameter('sector', 'sector_id')">
                                                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                                                     </button>
                                                 </span>
