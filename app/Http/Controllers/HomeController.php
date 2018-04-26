@@ -21,7 +21,9 @@ class HomeController extends Controller {
 
 //        dd(\App\Models\Administration\Stakeholder::all());
         $row = \App\Models\Administration\Stakeholder::find(Auth::user()->stakeholder_id);
-        Session::put('logo', $row->logo);
+        if ($row != null) {
+            Session::put('logo', $row->logo);
+        }
 
         $title = "Trusted";
         $logo = "";
