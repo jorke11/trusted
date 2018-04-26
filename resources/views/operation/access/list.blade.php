@@ -5,7 +5,7 @@
                 <div class="row">
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs" role="tablist" id='myTabsIntern'>
-                        <li role="presentation"  class="active" id="tabList"><a href="#list_access_control" aria-controls="special" role="tab" data-toggle="tab">Lstado</a></li>
+                        <li role="presentation"  class="active" id="tabList"><a href="#list_access_control" aria-controls="special" role="tab" data-toggle="tab">Visitantes</a></li>
                         <li role="presentation" id="tabPersonal"><a href="#authotization" aria-controls="special" role="tab" data-toggle="tab">Personal</a></li>
                     </ul>
 
