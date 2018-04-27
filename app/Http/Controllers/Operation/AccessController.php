@@ -47,7 +47,6 @@ class AccessController extends Controller {
 
 
             if ($person == null) {
-
                 $retrieved = $in["birth_date"];
                 $date = \DateTime::createFromFormat('dmY', $retrieved);
                 $in["birth_date"] = $date->format('Y-m-d');
@@ -74,6 +73,10 @@ class AccessController extends Controller {
                 }
 
                 $image->save($path);
+
+                $con = Access::where("insert_id", Auth::user()->id)->count();
+                $in["consecutive"] = ($con == 0) ? 1 : $con;
+
                 $row = Access::create($in);
 
                 return response()->json(["status" => true, "row" => $row, "msg" => "Registro ingresado"]);
@@ -135,13 +138,14 @@ class AccessController extends Controller {
     }
 
     public function listEmployeeLog() {
-        $query = EmployeeLog::select("employee_log.id", "employee.document", "employee_log.created_at", "employee_log.updated_at","employee_log.status_id")
+        $query = EmployeeLog::select("employee_log.id", "employee.document", "employee_log.created_at", "employee_log.updated_at", "employee_log.status_id")
                         ->join("employee", "employee.id", "employee_log.employee_id")->where("employee_log.stakeholder_id", Auth::user()->stakeholder_id);
         return Datatables::eloquent($query)->make(true);
     }
 
     public function validatePerson($document) {
         $row = Access::where("document", $document)->orderBy("created_at", "desc")->first();
+
         if ($row != null) {
             $row->birth_date = date("dmY", strtotime($row->birth_date));
             return response()->json(["status" => true, "row" => $row]);

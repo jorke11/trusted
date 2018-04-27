@@ -197,7 +197,7 @@
             <div class="col-lg-5">
                 <div class="row" style="padding-bottom: 20px">
                     <div class="col-lg-6">
-                        <video id="cam" width="370" height="300" autoplay="autoplay" style="border:1px solid #ccc;border-radius: 10px" >
+                        <video id="cam" width="300" height="230" autoplay="autoplay" style="border:1px solid #ccc;border-radius: 10px" >
                         </video>
                     </div>
                     <div class="col-lg-6 hidden" >

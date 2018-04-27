@@ -340,7 +340,7 @@ function access() {
             destroy: true,
             ajax: "/api/listAccess",
             columns: [
-                {data: "id"},
+                {data: "consecutive"},
                 {data: "first_name"},
                 {data: "second_name"},
                 {data: "last_name"},
