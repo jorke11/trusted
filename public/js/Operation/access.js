@@ -166,27 +166,32 @@ function access() {
         data.description = $("#frmAddParameter #description").val();
         var element_id = $("#frmAddParameter #element_id").val()
 
-        $.ajax({
-            url: PATH + '/accessPerson/addParameter',
-            type: 'POST',
-            data: data,
-            dataType: 'JSON',
-            success: function (data) {
-                toastr.success("Paramatro ingresado")
+        if (data.description != '') {
+
+            $.ajax({
+                url: PATH + '/accessPerson/addParameter',
+                type: 'POST',
+                data: data,
+                dataType: 'JSON',
+                success: function (data) {
+                    toastr.success("Paramatro ingresado")
 //                $(".input-product").cleanFields();
-                $("#frm #document").focus();
-                $("#modalParameter").modal("hide");
-                var html = '';
-                $("#" + element_id).empty();
-                html = "<option value='0'>Seleccione</option>";
-                $.each(data.detail, function (i, val) {
-                    html += "<option value='" + val.code + "'>" + val.description + "</option>";
-                })
+                    $("#frm #document").focus();
+                    $("#modalParameter").modal("hide");
+                    var html = '';
+                    $("#" + element_id).empty();
+                    html = "<option value='0'>Seleccione</option>";
+                    $.each(data.detail, function (i, val) {
+                        html += "<option value='" + val.code + "'>" + val.description + "</option>";
+                    })
 
-                $("#" + element_id).html(html)
+                    $("#" + element_id).html(html)
 
-            }
-        })
+                }
+            })
+        } else {
+            toastr.error("El Dato no puede estar en blanco")
+        }
     }
 
     this.showModalParameter = function (group_parameter, element_id) {
