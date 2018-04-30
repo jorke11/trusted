@@ -22,6 +22,46 @@ function User() {
 
         $("#btnUpload").click(this.uploadExcel)
 
+        $("#btnAddParameter").click(this.addParameter);
+
+    }
+
+    this.addParameter = function () {
+        var data = {};
+        data.group = $("#frmAddParameter #group_parameter").val();
+        data.description = $("#frmAddParameter #description").val();
+        var element_id = $("#frmAddParameter #element_id").val()
+
+        console.log(PATH + '/accessPerson/addParameter')
+
+        $.ajax({
+            url: PATH + '/accessPerson/addParameter',
+            type: 'POST',
+            data: data,
+            dataType: 'JSON',
+            success: function (data) {
+                toastr.success("Paramatro ingresado")
+//                $(".input-product").cleanFields();
+                $("#frm #document").focus();
+                $("#modalParameter").modal("hide");
+                var html = '';
+                $("#" + element_id).empty();
+                html = "<option value='0'>Seleccione</option>";
+                $.each(data.detail, function (i, val) {
+                    html += "<option value='" + val.code + "'>" + val.description + "</option>";
+                })
+
+                $("#" + element_id).html(html)
+
+            }
+        })
+    }
+
+    this.showModalParameter = function (group_parameter, element_id) {
+        $(".input-parameter").cleanFields();
+        $("#frmAddParameter #group_parameter").val(group_parameter);
+        $("#frmAddParameter #element_id").val(element_id);
+        $("#modalParameter").modal("show");
     }
 
     this.uploadExcel = function () {

@@ -1,13 +1,13 @@
 function Document() {
-    var table;
+    var tableE;
 
     this.init = function () {
-        table = obj.table();
+        tableE = obj.table();
         $("#dependency_id").click(this.usersDependency)
         $("#btnSave").click(this.save);
         $("#btnAddParameter").click(this.addParameter);
 
-        $("#tabList").click(obj.table);
+        $("#tabList").click(objE.table);
         $("#btnAddObservation").click(this.saveDelivery)
     }
 
@@ -25,7 +25,7 @@ function Document() {
                 $(".cargando").removeClass("hidden");
             },
             success: function (data) {
-                table.ajax.reload();
+                tableE.ajax.reload();
             }, error: function (xhr, ajaxOptions, thrownError) {
                 //clearInterval(intervalo);
                 console.log(thrownError)
@@ -129,7 +129,7 @@ function Document() {
                 {
                     aTargets: [0, 1, 2, 3, 4, 5],
                     mRender: function (data, type, full) {
-                        return '<a href="#" onclick="obj.showModal(' + full.id + ')">' + data + '</a>';
+                        return '<a href="#" onclick="objE.showModal(' + full.id + ')">' + data + '</a>';
                     }
                 },
                 {
@@ -140,10 +140,10 @@ function Document() {
 
                         var html = ''
                         if (data.status_id == 2) {
-                            html = '<button class="btn btn-success btn-xs" onclick=obj.openModalDeliveryStatus("' + $.trim(data.img_delivery) + '","' + (data.observation_delivery).replace(/ /g, "@#") + '") type="button"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button>';
+                            html = '<button class="btn btn-success btn-xs" onclick=objE.openModalDeliveryStatus("' + $.trim(data.img_delivery) + '","' + (data.observation_delivery).replace(/ /g, "@#") + '") type="button"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button>';
 
                         } else {
-                            html = '<button class="btn btn-info btn-xs" onclick="obj.openModalDelivery(' + data.id + ')" type="button"><span class="glyphicon glyphicon-send" aria-hidden="true"></span></button>';
+                            html = '<button class="btn btn-info btn-xs" onclick="objE.openModalDelivery(' + data.id + ')" type="button"><span class="glyphicon glyphicon-send" aria-hidden="true"></span></button>';
                         }
 
                         return html
@@ -164,5 +164,5 @@ function Document() {
 
 }
 
-var obj = new Document();
-obj.init();
+var objE = new Document();
+objE.init();

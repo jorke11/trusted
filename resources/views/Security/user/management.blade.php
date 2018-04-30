@@ -66,13 +66,20 @@
     <div class="row">
         <div class="col-lg-3">
             <div class="form-group">
-                <label for="email">Area:</label>
-                <select id="dependency_id" name="dependency_id" class="form-control input-user">
-                    <option value="0">Ninguno</option>
-                    @foreach($dependency as $rol)
-                    <option value="{{$rol->code}}">{{$rol->description}}</option>
-                    @endforeach
-                </select>
+                <label for="email">Dependencia</label>
+                <div class="input-group input-group-sm">
+                    <select class="form-control input-product" id="dependency_id" name='dependency_id'>
+                        <option value="0">Seleccione</option>
+                        @foreach($dependency as $val)
+                        <option value="{{$val->code}}">{{$val->description}}</option>
+                        @endforeach
+                    </select>
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="button" onclick="obj.showModalParameter('dependency', 'dependency_id')">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                        </button>
+                    </span>
+                </div>
             </div>
         </div>
         <div class="col-lg-3">
@@ -89,4 +96,6 @@
         </div>
     </div>
     {!!Form::close()!!}
+
+    @include('Security.user.modalParameters')
 </div>
