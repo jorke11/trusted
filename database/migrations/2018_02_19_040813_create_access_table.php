@@ -31,6 +31,7 @@ class CreateAccessTable extends Migration {
             $table->integer('element_id')->nullable();
             $table->integer('mark_id')->nullable();
             $table->text('text_serie')->nullable();
+            $table->text('observation')->nullable();
             $table->timestamps();
         });
     }

@@ -358,6 +358,7 @@ function access() {
                 {data: "type_blood"},
                 {data: "dependency"},
                 {data: "authorization_person"},
+                {data: "observation"},
                 {data: "img", searchable: false, render: function (data, type, row) {
                         return '<span class="glyphicon glyphicon-eye-open" aria-hidden="true" onclick=obj.openModalPhoto(this) src=' + row.img + ' style="cursor:pointer;color:black"></span>';
                     }
@@ -377,7 +378,7 @@ function access() {
                     }
                 },
                 {
-                    targets: [15],
+                    targets: [16],
                     searchable: false,
                     mData: null,
                     mRender: function (data, type, full) {

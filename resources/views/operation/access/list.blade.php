@@ -27,7 +27,8 @@
                                         <th>Salida</th>
                                         <th>Tipo de Sangre</th>
                                         <th>Lugar</th>
-                                        <th>Përsona Autorizacion</th>
+                                        <th>Persona Autorizacion</th>
+                                        <th>Observaciones</th>
                                         <th>img</th>
                                         <th>Estado</th>
                                         <th>Action</th>

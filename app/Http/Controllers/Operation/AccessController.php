@@ -39,30 +39,34 @@ class AccessController extends Controller {
     public function store(Request $req) {
         $in = $req->all();
 
-
         $emp = Employee::where("document", $in["document"])->where("stakeholder_id", Auth::user()->stakeholder_id)->first();
 
         if ($emp == null) {
             $person = Access::where("document", $in["document"])->where("insert_id", Auth::user()->id)->where("status_id", 1)->first();
 
-
             if ($person == null) {
+                $person_img = Access::where("document", $in["document"])->orderBy("id")->first();
+
                 $retrieved = $in["birth_date"];
                 $date = \DateTime::createFromFormat('dmY', $retrieved);
                 $in["birth_date"] = $date->format('Y-m-d');
 
-                $path = public_path() . "/images/" . date("Y-m-d");
-                $pathsys = "images/" . date("Y-m-d");
+                if ($person_img->img == '') {
+                    $path = public_path() . "/images/" . date("Y-m-d");
+                    $pathsys = "images/" . date("Y-m-d");
 
-                $res = File::makeDirectory($path, $mode = 0777, true, true);
-                $manager = new ImageManager(array('driver' => 'imagick'));
+                    $res = File::makeDirectory($path, $mode = 0777, true, true);
+                    $manager = new ImageManager(array('driver' => 'imagick'));
 
-                $image = $manager->make($in["img"])->widen(400);
-                $pathsys .= "/" . $in["document"] . ".jpg";
-                $path .= "/" . $in["document"] . ".jpg";
+                    $image = $manager->make($in["img"])->widen(400);
+                    $pathsys .= "/" . $in["document"] . ".jpg";
+                    $path .= "/" . $in["document"] . ".jpg";
+                    $in["img"] = url($pathsys);
+                       $image->save($path);
+                } else {
+                    $in["img"] = $person_img->img;
+                }
 
-
-                $in["img"] = url($pathsys);
                 $in["birth_date"] = date("Y-m-d", strtotime($in["birth_date"]));
                 $in["status_id"] = 1;
                 $in["insert_id"] = Auth::user()->id;
@@ -72,19 +76,17 @@ class AccessController extends Controller {
                     unset($in["mark_id"]);
                 }
 
-                $image->save($path);
+             
 
                 $con = Access::where("insert_id", Auth::user()->id)->count();
                 $in["consecutive"] = ($con == 0) ? 1 : $con;
 
                 $row = Access::create($in);
-
                 return response()->json(["status" => true, "row" => $row, "msg" => "Registro ingresado"]);
             } else {
                 return response()->json(["status" => false, "msg" => "Persona ingresada, tienes que darle salida antes de ingresarlo de nuevo"]);
             }
         } else {
-
             $log = EmployeeLog::where("employee_id", $emp->id)->where("status_id", 1)->first();
 
             if ($log != null) {

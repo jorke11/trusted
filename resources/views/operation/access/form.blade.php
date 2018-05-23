@@ -25,10 +25,9 @@
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="email" class="control-label">Segundo Apellido*</label>
-                                    <input type="text" class="form-control input-product input-sm" id="second_surname" name='second_surname' required>
+                                    <input type="text" class="form-control input-product input-sm" id="second_surname" name='second_surname'>
                                 </div>
                             </div>
-
                         </div>
                         <div class="row">
                             <div class="col-lg-4">
@@ -188,6 +187,14 @@
                                 <div class="form-group">
                                     <label for="email">Toma algun Medicamento</label>
                                     <input type="text" class="form-control input-product" id="medicine" name='medicine'>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="email">Observaciones</label>
+                                    <textarea class="form-control input-product" id="observation" name='observation'></textarea>
                                 </div>
                             </div>
                         </div>
