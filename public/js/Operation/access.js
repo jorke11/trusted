@@ -9,6 +9,10 @@ function access() {
             this.value = this.value.replace(/[^0-9]/g, '');
         });
 
+        $('.input-alpha').on('input', function () {
+            this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+        });
+
 
         table = obj.table();
         $(".input-product").cleanFields({disabled: false});
@@ -18,26 +22,38 @@ function access() {
         $("#btnNew").click(function () {
             obj.takePhoto();
             var data = {};
-            data = $(".input-product").getData();
-            data.img = c.toDataURL("image/jpg");
 
-            $.ajax({
-                url: PATH + '/accessPerson',
-                type: 'POST',
-                data: data,
-                dataType: 'JSON',
-                success: function (data) {
-                    if (data.status == true) {
-                        toastr.success(data.msg)
-                        table.ajax.reload();
-                        $(".input-product").cleanFields();
-                        $("#frm #document").focus();
-                    } else {
-                        toastr.error(data.msg)
+            var val = $(".input-product").validate();
+
+
+            if (val.length == 0) {
+                data = $(".input-product").getData();
+                data.img = c.toDataURL("image/jpg");
+
+
+
+                $.ajax({
+                    url: PATH + '/accessPerson',
+                    type: 'POST',
+                    data: data,
+                    dataType: 'JSON',
+                    success: function (data) {
+                        if (data.status == true) {
+                            toastr.success(data.msg)
+                            table.ajax.reload();
+                            $(".input-product").cleanFields();
+                            $("#frm #document").focus();
+                        } else {
+                            toastr.error(data.msg)
+                        }
                     }
-                }
-            })
+                })
+            } else {
+                toastr.error("Campos obligatorios!");
+            }
         });
+
+
 
         $("#btnSave").click(this.save);
         $("#btnAddParameter").click(this.addParameter);

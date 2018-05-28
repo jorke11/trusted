@@ -13,19 +13,19 @@
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="title" class="control-label">Documento*</label>
-                                    <input type="text" class="form-control input-product input-sm input-number" id="document" name='document' required autofocus="">
+                                    <input type="text" class="form-control input-product input-sm input-number" id="document" name='document' required autofocus="" maxlength="15">
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="description" class="control-label">Primer Apellido*</label>
-                                    <input type="text" class="form-control input-product input-sm" id="last_name" name='last_name' required>
+                                    <input type="text" class="form-control input-product input-sm input-alpha" id="last_name" name='last_name' required>
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="email" class="control-label">Segundo Apellido*</label>
-                                    <input type="text" class="form-control input-product input-sm" id="second_surname" name='second_surname'>
+                                    <input type="text" class="form-control input-product input-sm input-alpha" id="second_surname" name='second_surname'>
                                 </div>
                             </div>
                         </div>
@@ -33,19 +33,19 @@
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="email" class="control-label">Primero Nombre*</label>
-                                    <input type="text" class="form-control input-product input-sm" id="first_name" name='first_name' required>
+                                    <input type="text" class="form-control input-product input-sm input-alpha" id="first_name" name='first_name' required>
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="email" class="control-label">Segundo Nombre*</label>
-                                    <input type="text" class="form-control input-product input-sm" id="second_name" name='second_name' data-type="number">
+                                    <input type="text" class="form-control input-product input-sm input-alpha" id="second_name" name='second_name' data-type="number">
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="email" class="control-label">Genero*</label>
-                                    <input type="text" class="form-control input-product input-sm" id="gender" name='gender' required data-type="number">
+                                    <input type="text" class="form-control input-product input-sm" id="gender" name='gender' required maxlength="1">
                                 </div>
                             </div>
                         </div>
@@ -53,13 +53,13 @@
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="email">Fecha de nacimiento</label>
-                                    <input type="text" class="form-control input-product input-number" id="birth_date" name='birth_date' required input-number placeholder="ddmmyyyy">
+                                    <input type="text" class="form-control input-product input-number" id="birth_date" name='birth_date' required input-number placeholder="ddmmyyyy" maxlength="8">
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="email">Tipo de Sangre</label>
-                                    <input type="text" class="form-control input-product" id="type_blood" name='type_blood'>
+                                    <input type="text" class="form-control input-product" id="type_blood" name='type_blood' maxlength="3" required="">
                                 </div>
                             </div>
                             <div class="col-lg-4">
@@ -174,7 +174,7 @@
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="email">Persona de contacto</label>
-                                    <input type="text" class="form-control input-product" id="person_contact" name='person_contact'>
+                                    <input type="text" class="form-control input-product input-number" id="person_contact" name='person_contact'>
                                 </div>
                             </div>
                             <div class="col-lg-4">

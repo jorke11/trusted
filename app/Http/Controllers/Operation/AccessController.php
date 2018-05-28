@@ -42,7 +42,7 @@ class AccessController extends Controller {
         $emp = Employee::where("document", $in["document"])->where("stakeholder_id", Auth::user()->stakeholder_id)->first();
 
         if ($emp == null) {
-            $person = Access::where("document", $in["document"])->where("insert_id", Auth::user()->id)->where("status_id", 1)->first();
+            $person = Access::where("document", $in["document"])->where("insert_id", Auth::user()->id)->where("stakeholder_id", Auth::user()->stakeholder_id)->where("status_id", 1)->first();
 
             if ($person == null) {
                 $person_img = Access::where("document", $in["document"])->orderBy("id")->first();
@@ -51,7 +51,8 @@ class AccessController extends Controller {
                 $date = \DateTime::createFromFormat('dmY', $retrieved);
                 $in["birth_date"] = $date->format('Y-m-d');
 
-                if ($person_img->img == '') {
+
+                if ($person_img == null) {
                     $path = public_path() . "/images/" . date("Y-m-d");
                     $pathsys = "images/" . date("Y-m-d");
 
@@ -62,7 +63,7 @@ class AccessController extends Controller {
                     $pathsys .= "/" . $in["document"] . ".jpg";
                     $path .= "/" . $in["document"] . ".jpg";
                     $in["img"] = url($pathsys);
-                       $image->save($path);
+                    $image->save($path);
                 } else {
                     $in["img"] = $person_img->img;
                 }
@@ -76,11 +77,10 @@ class AccessController extends Controller {
                     unset($in["mark_id"]);
                 }
 
-             
 
                 $con = Access::where("insert_id", Auth::user()->id)->count();
                 $in["consecutive"] = ($con == 0) ? 1 : $con;
-
+                $in["stakeholder_id"] = Auth::user()->stakeholder_id;
                 $row = Access::create($in);
                 return response()->json(["status" => true, "row" => $row, "msg" => "Registro ingresado"]);
             } else {
@@ -146,7 +146,9 @@ class AccessController extends Controller {
     }
 
     public function validatePerson($document) {
-        $row = Access::where("document", $document)->orderBy("created_at", "desc")->first();
+
+        $row = Access::where("document", $document)->where("stakeholder_id", Auth::user()->stakeholder_id)->orderBy("created_at", "desc")->first();
+
 
         if ($row != null) {
             $row->birth_date = date("dmY", strtotime($row->birth_date));
