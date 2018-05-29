@@ -1,7 +1,8 @@
 drop view vaccess_person
 create view vaccess_person as
 select a.id,a.first_name,a.second_name,a.last_name,a.second_surname,a.gender,a.document,a.birth_date,a.type_blood,eps.description as eps,
-arl.description as arl,a.status_id,a.created_at,a.updated_at,dep.description as dependency,a.authorization_person,a.insert_id,a.img,a.consecutive,a.observation
+arl.description as arl,a.status_id,a.created_at,a.updated_at,dep.description as dependency,a.authorization_person,a.insert_id,a.img,a.consecutive,a.observation,
+a.stakeholder_id
 from  access_person a
 LEFT JOIN parameters eps ON eps.code=eps_id and eps.group ='eps'
 LEFT JOIN parameters arl ON arl.code=arl_id and arl.group ='arl'

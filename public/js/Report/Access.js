@@ -31,19 +31,19 @@ function Access() {
                 {data: "type_blood"},
                 {data: "dependency"},
                 {data: "authorization_person"},
-                {data: "img", render: function (data, type, row) {
-                        return '<span class="glyphicon glyphicon-eye-open" aria-hidden="true" onclick=obj.openModalPhoto(this) src=' + row.img + ' style="cursor:pointer"></span>';
-                    }
-                },
                 {data: "status_id", render: function (data, type, row) {
                         return (row.status_id == 1) ? 'Ingreso' : "Salio";
+                    }
+                },
+                {data: "img", render: function (data, type, row) {
+                        return '<span class="glyphicon glyphicon-eye-open" aria-hidden="true" onclick=obj.openModalPhoto(this) src=' + row.img + ' style="cursor:pointer;color:black"></span>';
                     }
                 },
             ],
             order: [[1, 'ASC']],
             aoColumnDefs: [
                 {
-                    aTargets: [0, 1, 2, 3],
+                    aTargets: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
                     mRender: function (data, type, full) {
                         return '<a href="#" onclick="obj.showModal(' + full.id + ')">' + data + '</a>';
                     }

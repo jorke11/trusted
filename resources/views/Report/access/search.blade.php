@@ -58,8 +58,8 @@
                         <th>Tipo de Sangre</th>
                         <th>Lugar</th>
                         <th>Përsona Autorizacion</th>
-                        <th>img</th>
                         <th>Estado</th>
+                        <th>Img</th>
                         <th>Action</th>
                     </tr>
                 </thead>

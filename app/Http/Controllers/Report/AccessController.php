@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Operation\Access;
 use Yajra\Datatables\Facades\Datatables;
 use DB;
+use Auth;
 
 class AccessController extends Controller {
 
@@ -20,6 +21,9 @@ class AccessController extends Controller {
         $in = $req->all();
 
         $query = DB::table("vaccess_person")->orderBy("id", "desc");
+        if (Auth::user()->role_id != 1) {
+            $query->where("stakeholder_id", Auth::user()->stakeholder_id);
+        }
 
         if (isset($in["finit"]) && $in["fend"] != '') {
             $query->where("created_at", ">=", $in["finit"] . " 00:00");
