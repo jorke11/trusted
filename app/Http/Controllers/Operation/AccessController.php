@@ -109,7 +109,7 @@ class AccessController extends Controller {
         $sql = DB::table("vaccess_person");
 
         if (Auth::user()->role_id != 1) {
-            $sql->where("insert_id", Auth::user()->id);
+            $sql->where("stakeholder_id", Auth::user()->stakeholder_id);
         }
 
         $sql = $sql->orderBy("id", "desc");
@@ -146,9 +146,8 @@ class AccessController extends Controller {
     }
 
     public function validatePerson($document) {
-
+        
         $row = Access::where("document", $document)->where("stakeholder_id", Auth::user()->stakeholder_id)->orderBy("created_at", "desc")->first();
-
 
         if ($row != null) {
             $row->birth_date = date("dmY", strtotime($row->birth_date));
