@@ -174,13 +174,13 @@
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="email">Persona de contacto</label>
-                                    <input type="text" class="form-control input-product input-number" id="person_contact" name='person_contact'>
+                                    <input type="text" class="form-control input-product" id="person_contact" name='person_contact'>
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="email">Telefono de contacto</label>
-                                    <input type="text" class="form-control input-product" id="phone_contact" name='phone_contact'>
+                                    <input type="text" class="form-control input-product input-number" id="phone_contact" name='phone_contact'>
                                 </div>
                             </div>
                             <div class="col-lg-4">
