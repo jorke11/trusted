@@ -23,7 +23,6 @@ LEFT JOIN parameters apt ON apt.code=apartment_id and apt.group ='apartment'
 LEFT JOIN parameters typ ON typ.code=type_visit_id and typ.group ='type_visit'
 LEFT JOIN parameters typ_v ON typ_v.code=type_vehicle_id and typ_v.group ='type_vehicle'
 
-
 drop view vclient
 CREATE VIEW vclient AS
 SELECT s.id,s.business_name,s.business,coalesce(s.name,'') as name,coalesce(s.last_name,'') as last_name,s.document,s.email,coalesce(s.address_send,'') as address,s.phone,
