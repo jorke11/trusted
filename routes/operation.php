@@ -17,6 +17,16 @@ Route::get('accessPerson/validatePerson/{document}', 'Operation\AccessController
 //Route::put('accessPerson/outPerson', 'Operation\AccessController@outPerson');
 Route::get('/api/listAccess', 'Operation\AccessController@listAccess');
 
+Route::resource('homeaccessPerson', 'Operation\HomeaccessController');
+Route::post('homeaccessPerson/addParameter', 'Administration\ParametersController@store');
+Route::post('homeaccessPerson/reception', 'Operation\HomeaccessController@addElement');
+Route::post('homeaccessPerson/authorization', 'Operation\HomeccessController@addAuthorization');
+
+Route::get('homeaccessPerson/validatePerson/{document}', 'Operation\HomeaccessController@validatePerson');
+//Route::put('accessPerson/outPerson', 'Operation\AccessController@outPerson');
+Route::get('/api/listAccessHome', 'Operation\HomeaccessController@listAccess');
+
+
 Route::get('api/listAuth', function() {
     return Datatables::queryBuilder(DB::table("vauthorization_person")->orderBy("id", "desc"))->make(true);
 });

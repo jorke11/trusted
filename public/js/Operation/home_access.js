@@ -33,7 +33,7 @@ function access() {
 
 
                 $.ajax({
-                    url: PATH + '/accessPerson',
+                    url: PATH + '/homeaccessPerson',
                     type: 'POST',
                     data: data,
                     dataType: 'JSON',
@@ -222,12 +222,15 @@ function access() {
         var value = this.value;
         if (value != '') {
             $.ajax({
-                url: PATH + '/accessPerson/validatePerson/' + value,
+                url: PATH + '/homeaccessPerson/validatePerson/' + value,
                 type: 'get',
                 dataType: 'JSON',
                 success: function (data) {
                     if (data.status == true) {
                         $(".input-product").setFields({data: data.row})
+                        $("#img_person").attr("src",data.row.img)
+                    }else{
+                        $("#img_person").attr("src","")
                     }
                 }
             })
@@ -249,7 +252,7 @@ function access() {
         var data = {};
         if ($("#frm #document").val() != '') {
             $.ajax({
-                url: PATH + '/accessPerson/' + $("#frm #document").val(),
+                url: PATH + '/homeaccessPerson/' + $("#frm #document").val(),
                 type: 'put',
                 dataType: 'JSON',
                 success: function (data) {
@@ -363,7 +366,7 @@ function access() {
             processing: true,
             serverSide: true,
             destroy: true,
-            ajax: "/api/listAccess",
+            ajax: "/api/listAccessHome",
             columns: [
                 {data: "consecutive"},
                 {data: "first_name"},
@@ -377,7 +380,9 @@ function access() {
                 {data: "updated_at"},
                 {data: "type_blood"},
                 {data: "dependency"},
-                {data: "authorization_person"},
+                {data: "type_visit"},
+                {data: "type_vehicle"},
+                {data: "price"},
                 {data: "observation"},
                 {data: "img", searchable: false, render: function (data, type, row) {
                         return '<span class="glyphicon glyphicon-eye-open" aria-hidden="true" onclick=obj.openModalPhoto(this) src=' + row.img + ' style="cursor:pointer;color:black"></span>';
@@ -398,7 +403,7 @@ function access() {
                     }
                 },
                 {
-                    targets: [16],
+                    targets: [18],
                     searchable: false,
                     mData: null,
                     mRender: function (data, type, full) {
@@ -418,7 +423,7 @@ function access() {
         toastr.remove();
         var data = {};
         $.ajax({
-            url: PATH + '/accessPerson/' + document,
+            url: PATH + '/homeaccessPerson/' + document,
             type: 'put',
             dataType: 'JSON',
             success: function (data) {

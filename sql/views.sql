@@ -9,6 +9,21 @@ LEFT JOIN parameters arl ON arl.code=arl_id and arl.group ='arl'
 LEFT JOIN parameters dep ON dep.code=dependency_id and dep.group ='dependency'
 
 
+drop view vaccess_person_home
+
+create view vaccess_person_home as
+select a.id,a.first_name,a.second_name,a.last_name,a.second_surname,a.gender,a.document,a.birth_date,a.type_blood,eps.description as eps,
+arl.description as arl,a.status_id,a.created_at,a.updated_at,tor.description ||' (' ||apt.description||')' as dependency,typ.description as type_visit,
+a.insert_id,a.img,a.consecutive,a.observation,a.stakeholder_id,a.price,typ_v.description as type_vehicle
+from  access_person_home a
+LEFT JOIN parameters eps ON eps.code=eps_id and eps.group ='eps'
+LEFT JOIN parameters arl ON arl.code=arl_id and arl.group ='arl'
+LEFT JOIN parameters tor ON tor.code=torre_id and tor.group ='torre'
+LEFT JOIN parameters apt ON apt.code=apartment_id and apt.group ='apartment'
+LEFT JOIN parameters typ ON typ.code=type_visit_id and typ.group ='type_visit'
+LEFT JOIN parameters typ_v ON typ_v.code=type_vehicle_id and typ_v.group ='type_vehicle'
+
+
 drop view vclient
 CREATE VIEW vclient AS
 SELECT s.id,s.business_name,s.business,coalesce(s.name,'') as name,coalesce(s.last_name,'') as last_name,s.document,s.email,coalesce(s.address_send,'') as address,s.phone,

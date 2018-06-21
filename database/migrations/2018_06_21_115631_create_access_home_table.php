@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAccessTable extends Migration {
+class CreateAccessHomeTable extends Migration {
 
     /**
      * Run the migrations.
@@ -12,7 +12,7 @@ class CreateAccessTable extends Migration {
      * @return void
      */
     public function up() {
-        Schema::create('access_person', function (Blueprint $table) {
+        Schema::create('access_person_home', function (Blueprint $table) {
             $table->increments('id');
             $table->string('first_name');
             $table->string('second_name')->nullable();
@@ -26,15 +26,21 @@ class CreateAccessTable extends Migration {
             $table->integer('arl_id');
             $table->integer('eps_id');
             $table->integer('status_id');
-            $table->integer('dependency_id')->nullable();
+            $table->integer('torre_id')->nullable();
+            $table->integer('apartment_id')->nullable();
+            $table->integer('type_visit_id')->nullable();
+            $table->integer('park_id')->nullable();
+            $table->decimal('price', 15, 2);
+            $table->string('plate')->nullable();
             $table->string('authorization_person')->nullable();
             $table->integer('element_id')->nullable();
             $table->integer('mark_id')->nullable();
-            $table->integer('stakeholder_id')->nullable();
             $table->integer('insert_id')->nullable();
+            $table->integer('stakeholder_id')->nullable();
             $table->text('text_serie')->nullable();
             $table->text('observation')->nullable();
             $table->string('consecutive')->nullable();
+            $table->integer('time_in_park')->nullable();
             $table->timestamps();
         });
     }
@@ -45,7 +51,7 @@ class CreateAccessTable extends Migration {
      * @return void
      */
     public function down() {
-        Schema::dropIfExists('access_person');
+        Schema::dropIfExists('access_person_home');
     }
 
 }
