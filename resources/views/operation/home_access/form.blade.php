@@ -119,22 +119,45 @@
                                 </div>
                             </div>
                             <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label for="email">Apartamento</label>
-                                    <div class="input-group input-group-sm">
-                                        <select class="form-control input-product" id="apartment_id" name='apartment_id'>
-                                            <option value="0">Seleccione</option>
-                                            @foreach($apartment as $val)
-                                            <option value="{{$val->code}}">{{$val->description}}</option>
-                                            @endforeach
-                                        </select>
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-primary" type="button" onclick="obj.showModalParameter('apartment', 'apartment_id')">
-                                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                                            </button>
-                                        </span>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="email">Piso</label>
+                                            <div class="input-group input-group-sm">
+                                                <select class="form-control input-product" id="roof_id" name='roof_id'>
+                                                    <option value="0">Seleccione</option>
+                                                    @foreach($roof as $val)
+                                                    <option value="{{$val->code}}">{{$val->description}}</option>
+                                                    @endforeach
+                                                </select>
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-primary" type="button" onclick="obj.showModalParameter('roof', 'roof_id')">
+                                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="email">Apt</label>
+                                            <div class="input-group input-group-sm">
+                                                <select class="form-control input-product" id="apartment_id" name='apartment_id'>
+                                                    <option value="0">Seleccione</option>
+                                                    @foreach($apartment as $val)
+                                                    <option value="{{$val->code}}">{{$val->description}}</option>
+                                                    @endforeach
+                                                </select>
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-primary" type="button" onclick="obj.showModalParameter('apartment', 'apartment_id')">
+                                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
 

@@ -32,12 +32,13 @@ class HomeaccessController extends Controller {
         $type_visit = Parameters::where("group", "type_visit")->where("stakeholder_id", Auth::user()->stakeholder_id)->orderBy("description", "asc")->get();
         $parks = Parameters::where("group", "park")->where("stakeholder_id", Auth::user()->stakeholder_id)->orderBy("description", "asc")->get();
         $type_vehicle = Parameters::where("group", "type_vehicle")->where("stakeholder_id", Auth::user()->stakeholder_id)->orderBy("description", "asc")->get();
+        $roof = Parameters::where("group", "piso")->where("stakeholder_id", Auth::user()->stakeholder_id)->orderBy("description", "asc")->get();
         $mark = Parameters::where("group", "mark")->where("stakeholder_id", Auth::user()->stakeholder_id)->orderBy("description", "asc")->get();
         $elements_reception = Parameters::where("group", "element_reception")->where("stakeholder_id", Auth::user()->stakeholder_id)->orderBy("description", "asc")->get();
         $sender = Parameters::where("group", "sender")->where("stakeholder_id", Auth::user()->stakeholder_id)->orderBy("description", "asc")->get();
         $status_access = Parameters::where("group", "status_access")->where("stakeholder_id", Auth::user()->stakeholder_id)->orderBy("description", "asc")->get();
 
-        return view("operation.home_access.index", compact("arl", "type_visit", "parks", "eps", "torre", "apartment", "type_vehicle", "mark", "elements_reception", "sender", "status_access"));
+        return view("operation.home_access.index", compact("arl", "roof", "type_visit", "parks", "eps", "torre", "apartment", "type_vehicle", "mark", "elements_reception", "sender", "status_access"));
     }
 
     public function store(Request $req) {
@@ -50,13 +51,15 @@ class HomeaccessController extends Controller {
 
             if ($person == null) {
                 $person_img = AccessHome::where("document", $in["document"])->orderBy("id")->first();
-                $park = AccessHome::where("park_id",$in["park_id"])->where("status_id",1)->first();
-                
-                if($park!=null){
+                $park='';
+                if ($in["park_id"] != 0)
+                    $park = AccessHome::where("park_id", $in["park_id"])->where("status_id", 1)->first();
+
+                if ($park != null) {
                     return response()->json(["status" => false, "msg" => "Parqueadero no disponible"]);
                 }
-                
-                
+
+
                 $retrieved = $in["birth_date"];
                 $date = \DateTime::createFromFormat('dmY', $retrieved);
                 $in["birth_date"] = $date->format('Y-m-d');

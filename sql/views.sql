@@ -13,7 +13,7 @@ drop view vaccess_person_home
 
 create view vaccess_person_home as
 select a.id,a.first_name,a.second_name,a.last_name,a.second_surname,a.gender,a.document,a.birth_date,a.type_blood,eps.description as eps,
-arl.description as arl,a.status_id,a.created_at,a.updated_at,tor.description ||' (' ||apt.description||')' as dependency,typ.description as type_visit,
+arl.description as arl,a.status_id,a.created_at,a.updated_at,coalesce(tor.description,'') ||' (' ||coalesce(roof.description,'')||coalesce(apt.description,'')||')' as dependency,typ.description as type_visit,
 a.insert_id,a.img,a.consecutive,a.observation,a.stakeholder_id,a.price,typ_v.description as type_vehicle
 from  access_person_home a
 LEFT JOIN parameters eps ON eps.code=eps_id and eps.group ='eps'
@@ -22,6 +22,7 @@ LEFT JOIN parameters tor ON tor.code=torre_id and tor.group ='torre'
 LEFT JOIN parameters apt ON apt.code=apartment_id and apt.group ='apartment'
 LEFT JOIN parameters typ ON typ.code=type_visit_id and typ.group ='type_visit'
 LEFT JOIN parameters typ_v ON typ_v.code=type_vehicle_id and typ_v.group ='type_vehicle'
+LEFT JOIN parameters roof ON roof.code=roof_id and roof.group ='roof'
 
 drop view vclient
 CREATE VIEW vclient AS
