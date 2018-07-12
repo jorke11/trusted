@@ -20,8 +20,8 @@ class CreateAccessHomeTable extends Migration {
             $table->string('second_surname');
             $table->string('gender');
             $table->integer('document');
-            $table->date('birth_date');
-            $table->string('type_blood');
+            $table->date('birth_date')->nullable();
+            $table->string('type_blood')->nullable();
             $table->text('img');
             $table->integer('arl_id');
             $table->integer('eps_id');

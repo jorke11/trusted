@@ -53,13 +53,13 @@
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="email">Fecha de nacimiento</label>
-                                    <input type="text" class="form-control input-product input-number" id="birth_date" name='birth_date' required input-number placeholder="ddmmyyyy" maxlength="8">
+                                    <input type="text" class="form-control input-product input-number" id="birth_date" name='birth_date' input-number placeholder="ddmmyyyy" maxlength="8">
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="email">Tipo de Sangre</label>
-                                    <input type="text" class="form-control input-product" id="type_blood" name='type_blood' maxlength="3" required="">
+                                    <input type="text" class="form-control input-product" id="type_blood" name='type_blood' maxlength="3">
                                 </div>
                             </div>
                             <div class="col-lg-4">

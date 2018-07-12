@@ -51,7 +51,7 @@ class HomeaccessController extends Controller {
 
             if ($person == null) {
                 $person_img = AccessHome::where("document", $in["document"])->orderBy("id")->first();
-                $park='';
+                $park = '';
                 if ($in["park_id"] != 0)
                     $park = AccessHome::where("park_id", $in["park_id"])->where("status_id", 1)->first();
 
@@ -59,10 +59,14 @@ class HomeaccessController extends Controller {
                     return response()->json(["status" => false, "msg" => "Parqueadero no disponible"]);
                 }
 
+                $in["birth_date"] = null;
+                if (isset($in["birth_date"])) {
+                    $retrieved = $in["birth_date"];
+                    $date = \DateTime::createFromFormat('dmY', $retrieved);
+                    $in["birth_date"] = $date->format('Y-m-d');
+                }
 
-                $retrieved = $in["birth_date"];
-                $date = \DateTime::createFromFormat('dmY', $retrieved);
-                $in["birth_date"] = $date->format('Y-m-d');
+
 
 
                 if ($person_img == null) {
