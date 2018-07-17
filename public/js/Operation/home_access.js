@@ -228,9 +228,9 @@ function access() {
                 success: function (data) {
                     if (data.status == true) {
                         $(".input-product").setFields({data: data.row})
-                        $("#img_person").attr("src",data.row.img)
-                    }else{
-                        $("#img_person").attr("src","")
+                        $("#img_person").attr("src", data.row.img)
+                    } else {
+                        $("#img_person").attr("src", "")
                     }
                 }
             })
@@ -362,10 +362,15 @@ function access() {
     }
 
     this.table = function () {
+
         return $('#tbl').DataTable({
             processing: true,
             serverSide: true,
             destroy: true,
+            search: {
+                caseInsensitive: true
+            },
+            searchHighlight: true,
             ajax: "/api/listAccessHome",
             columns: [
                 {data: "consecutive"},

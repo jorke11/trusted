@@ -32,13 +32,15 @@ class HomeaccessController extends Controller {
         $type_visit = Parameters::where("group", "type_visit")->where("stakeholder_id", Auth::user()->stakeholder_id)->orderBy("description", "asc")->get();
         $parks = Parameters::where("group", "park")->where("stakeholder_id", Auth::user()->stakeholder_id)->orderBy("description", "asc")->get();
         $type_vehicle = Parameters::where("group", "type_vehicle")->where("stakeholder_id", Auth::user()->stakeholder_id)->orderBy("description", "asc")->get();
-        $roof = Parameters::where("group", "piso")->where("stakeholder_id", Auth::user()->stakeholder_id)->orderBy("description", "asc")->get();
+        $roof = Parameters::where("group", "roof")->where("stakeholder_id", Auth::user()->stakeholder_id)->orderBy("description", "asc")->get();
         $mark = Parameters::where("group", "mark")->where("stakeholder_id", Auth::user()->stakeholder_id)->orderBy("description", "asc")->get();
         $elements_reception = Parameters::where("group", "element_reception")->where("stakeholder_id", Auth::user()->stakeholder_id)->orderBy("description", "asc")->get();
         $sender = Parameters::where("group", "sender")->where("stakeholder_id", Auth::user()->stakeholder_id)->orderBy("description", "asc")->get();
         $status_access = Parameters::where("group", "status_access")->where("stakeholder_id", Auth::user()->stakeholder_id)->orderBy("description", "asc")->get();
 
-        return view("operation.home_access.index", compact("arl", "roof", "type_visit", "parks", "eps", "torre", "apartment", "type_vehicle", "mark", "elements_reception", "sender", "status_access"));
+        
+        return view("operation.home_access.index", compact("arl", "roof", "type_visit", "parks", "eps", "torre", "apartment", "type_vehicle", 
+                "mark", "elements_reception", "sender", "status_access"));
     }
 
     public function store(Request $req) {
@@ -89,10 +91,6 @@ class HomeaccessController extends Controller {
                 $in["status_id"] = 1;
                 $in["insert_id"] = Auth::user()->id;
                 unset($in["id"]);
-
-                if ($in["mark_id"] == "null") {
-                    unset($in["mark_id"]);
-                }
 
 
                 $con = AccessHome::where("insert_id", Auth::user()->id)->count();

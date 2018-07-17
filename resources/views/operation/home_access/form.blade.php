@@ -226,7 +226,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4">
+<!--                            <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="email">Marca</label>
                                     <div class="input-group input-group-sm">
@@ -243,15 +243,9 @@
                                         </span>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label for="email">Serie</label>
-                                    <input type="text" class="form-control input-product" id="text_serie" name='text_serie'>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
+                            </div>-->
+                        <!--</div>-->
+                        <!--<div class="row">-->
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="email">Persona de contacto</label>
@@ -270,8 +264,8 @@
                                     <input type="text" class="form-control input-product" id="medicine" name='medicine'>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
+                        <!--</div>-->
+                        <!--<div class="row">-->
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="email">Observaciones</label>

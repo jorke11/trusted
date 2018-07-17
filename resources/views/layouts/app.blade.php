@@ -239,7 +239,9 @@
                             <li class="dropdown active">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Operacion <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
+                                    @if(Auth::user()->role_id!=3)
                                     <li><a href="/accessPerson">Ingreso Personas</a></li>
+                                    @endif
                                     <li><a href="/homeaccessPerson">Ingreso Personas Conjuntos</a></li>
                                     <li><a href="/inputDocument">Recepción de Documentos</a></li>
                                     @if(Auth::user()->role_id!=3)

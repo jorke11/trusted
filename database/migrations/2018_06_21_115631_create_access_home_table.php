@@ -25,6 +25,8 @@ class CreateAccessHomeTable extends Migration {
             $table->text('img');
             $table->integer('arl_id');
             $table->integer('eps_id');
+            $table->integer('type_vehicle_id')->nullable();
+            $table->integer('roof_id')->nullable();
             $table->integer('status_id');
             $table->integer('torre_id')->nullable();
             $table->integer('apartment_id')->nullable();
